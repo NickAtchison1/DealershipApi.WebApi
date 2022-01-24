@@ -8,5 +8,7 @@ namespace DealershipApi.Models.DisplayModels.Dealership
 {
     public class DealershipCreate
     {
+        public string Name { get; set; }
+        public string Address { get; set; }
     }
 }
