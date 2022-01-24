@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using DealershipApi.WebApi.Providers;
 using DealershipApi.WebApi.Models;
+using DealershipApi.Data.DataModels;
 
 namespace DealershipApi.WebApi
 {

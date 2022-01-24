@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using DealershipApi.WebApi.Models;
 using DealershipApi.WebApi.Providers;
 using DealershipApi.WebApi.Results;
+using DealershipApi.Data.DataModels;
 
 namespace DealershipApi.WebApi.Controllers
 {
@@ -250,6 +251,7 @@ namespace DealershipApi.WebApi.Controllers
                 return new ChallengeResult(provider, this);
             }
 
+            
             ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
