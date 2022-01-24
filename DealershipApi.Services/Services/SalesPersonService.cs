@@ -83,7 +83,18 @@ namespace DealershipApi.Services.Services
             }
         }
 
-
+        public bool RemoveSalesPerson (int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .SalesPeople
+                        .Single(e => e.Id == id);
+                ctx.SalesPeople.Remove(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
         
     }
 }
