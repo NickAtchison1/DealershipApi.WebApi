@@ -66,7 +66,24 @@ namespace DealershipApi.Services.Services
             }
         }
 
+        public bool UpdateSalesPerson(SalesPersonEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .SalesPeople
+                        .Single(s => s.Id == model.Id);
+
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.Email = model.Email;
+
+                return ctx.SaveChanges() > 0;
+            }
+        }
 
 
+        
     }
 }
