@@ -12,11 +12,15 @@ namespace DealershipApi.WebApi.Controllers
     [Authorize]
     public class SalesPersonController : ApiController
     {
+
+
+    
         private SalesPersonService CreateSalesPersonService()
         {
             return new SalesPersonService();
         }
 
+        [HttpGet]
         public IHttpActionResult GetSalesPeople()
         {
             SalesPersonService s = CreateSalesPersonService();
@@ -24,16 +28,31 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(salespeople);
         }
 
-        public IHttpActionResult CreateSalesPerson(SalesPersonCreate model)
+        [HttpPost]
+        public IHttpActionResult CreateSalesPerson(SalesPersonCreate person)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var salesperson = CreateSalesPersonService();
 
-            if (!salesperson.CreateSalesPerson(model)) return InternalServerError();
+            if (!salesperson.CreateSalesPerson(person)) return InternalServerError();
 
             return Ok(salesperson);
         }
+
+        [HttpPut]
+
+        public IHttpActionResult UpdateSalesPerson(SalesPersonEdit person)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var service = CreateSalesPersonService();
+
+            if (!service.UpdateSalesPerson(person)) return InternalServerError();
+
+            return Ok(person);
+        }
+    
 
 
     }
