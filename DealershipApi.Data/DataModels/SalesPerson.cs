@@ -17,7 +17,7 @@ namespace DealershipApi.Data.DataModels
         [Required]
         public string LastName { get; set; }
         public string Email { get; set; }
-        [ForeignKey]
+        [ForeignKey (nameof(Dealership))]
         public int DealerShipID { get; set; }
     }
 }
