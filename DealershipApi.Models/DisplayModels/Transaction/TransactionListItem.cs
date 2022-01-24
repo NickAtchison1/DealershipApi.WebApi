@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealershipApi.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,11 @@ namespace DealershipApi.Models.DisplayModels.Transaction
 {
     public class TransactionListItem
     {
+        public TransactionType TypeOfTransaction { get; set; }
+        public string VehicleName { get; set; }
+        public string SalesPersonName { get; set; }
+        public string DealershipName { get; set; }
+        public decimal SalesPrice { get; set; }
+        public DateTime SalesDate { get; set; }
     }
 }
