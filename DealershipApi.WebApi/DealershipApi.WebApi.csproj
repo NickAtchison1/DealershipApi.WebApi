@@ -322,7 +322,7 @@
       <Name>DealershipApi.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\DealershipApi.Services\DealershipApi.Services.csproj">
-      <Project>{2660bc05-93cb-4413-8cd4-05f17c0db248}</Project>
+      <Project>{2660BC05-93CB-4413-8CD4-05F17C0DB248}</Project>
       <Name>DealershipApi.Services</Name>
     </ProjectReference>
   </ItemGroup>
