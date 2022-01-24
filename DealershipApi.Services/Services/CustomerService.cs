@@ -11,12 +11,6 @@ namespace DealershipApi.Services.Services
 {
     public class CustomerService
     {
-        public bool CreateNote(CustomerCreate customer)
-        {
-            _userId = userId;
-        }
-
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
         public bool CreateCustomer(CustomerCreate customer)
         {
             var entity = new Customer()
@@ -26,24 +20,27 @@ namespace DealershipApi.Services.Services
                 Address = customer.Address,
                 Email = customer.Email,
             };
-
-            _context.Customers.Add(entity);
-            return _context.SaveChanges() == 1;
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Customers.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
 
         public IEnumerable<CustomerListItem> GetCustomers()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Customers.Where(e => e.Id == _userId).Select(e => new CustomerListItem
-                {
-                    CustomerId = e.Id,
-                    FirstName = e.FirstName,
-                    Address = e.Address,
-                    Email=e.Email,
-                }
-                 );
-                return query.ToArray();
+                var query = ctx.Customers
+                    .Select(d => new CustomerListItem()
+                    {
+                        CustomerId = d.Id,
+                        FirstName = d.FirstName,
+                        LastName= d.LastName,
+                        Address = d.Address,
+                        Email = d.Email
+                    });
+                return query.ToList();
             }
         }
 
@@ -51,14 +48,14 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Customers.Single(e => e.Id == id);
+                var entity = ctx.Customers.Single(d => d.Id == id);
                 return new CustomerDetail
                 {
                     CustomerId = entity.Id,
                     FirstName = entity.FirstName,
                     LastName = entity.LastName,
                     Address = entity.Address,
-                    Email = entity.Email,
+                    Email = entity.Email
                 };
             }
         }
@@ -67,7 +64,7 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Customers.Single(e => e.Id == customer.CustomerId);
+                var entity = ctx.Customers.Single(d => d.Id == customer.CustomerId);
 
                 entity.FirstName = customer.FirstName;
                 entity.LastName = customer.LastName;
@@ -82,7 +79,9 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Notes.Add(entity);
+                var entity = ctx.Customers.Single(d => d.Id == id);
+                ctx.Customers.Remove(entity);
+
                 return ctx.SaveChanges() == 1;
             }
         }
