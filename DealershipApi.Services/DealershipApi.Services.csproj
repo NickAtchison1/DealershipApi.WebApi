@@ -76,6 +76,10 @@
       <Project>{AA9A7CD1-782B-48EC-BDA6-277EC9BEDC6B}</Project>
       <Name>DealershipApi.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DealershipApi.Models\DealershipApi.Models.csproj">
+      <Project>{2E3BA0D0-65CA-4054-9DE8-B0BB150C907D}</Project>
+      <Name>DealershipApi.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
