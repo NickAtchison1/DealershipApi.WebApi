@@ -24,6 +24,7 @@ namespace DealershipApi.Data.DataModels
         public int DealershipId { get; set; }
         public decimal SalesPrice { get; set; }
         public DateTime SalesDate { get; set; }
+        public TransactionType TypeOfTransaction { get; set; }
 
         public virtual Vehicle Vehicle { get; set; }
         public virtual Customer Customer { get; set; }  

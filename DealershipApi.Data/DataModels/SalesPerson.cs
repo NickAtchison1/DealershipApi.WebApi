@@ -20,5 +20,12 @@ namespace DealershipApi.Data.DataModels
 
         [ForeignKey (nameof(Dealership))]
         public int DealerShipID { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

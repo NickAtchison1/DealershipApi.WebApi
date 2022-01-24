@@ -35,8 +35,7 @@ namespace DealershipApi.Services.Services
                     .Select(d => new CustomerListItem()
                     {
                         CustomerId = d.Id,
-                        FirstName = d.FirstName,
-                        LastName= d.LastName,
+                        FullName = d.FullName,
                         Address = d.Address,
                         Email = d.Email
                     });
@@ -52,8 +51,7 @@ namespace DealershipApi.Services.Services
                 return new CustomerDetail
                 {
                     CustomerId = entity.Id,
-                    FirstName = entity.FirstName,
-                    LastName = entity.LastName,
+                    FullName = entity.FullName,
                     Address = entity.Address,
                     Email = entity.Email
                 };
