@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DealershipApi.Models.DisplayModels.Customer
 {
-    public class CustomerEdit
+    public class CustomerListItem
     {
     }
 }

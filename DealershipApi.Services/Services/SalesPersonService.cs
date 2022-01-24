@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DealershipApi.Models.DisplayModels.Customer
+namespace DealershipApi.Services.Services
 {
-    public class CustomerEdit
+    public class SalesPersonService
     {
     }
 }

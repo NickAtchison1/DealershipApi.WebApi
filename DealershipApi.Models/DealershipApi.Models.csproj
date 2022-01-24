@@ -54,18 +54,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayModels\Customer\CustomerCreate.cs" />
+    <Compile Include="DisplayModels\Customer\CustomerDetail.cs" />
+    <Compile Include="DisplayModels\Customer\CustomerEdit.cs" />
+    <Compile Include="DisplayModels\Customer\CustomerListItem.cs" />
+    <Compile Include="DisplayModels\Dealership\DealershipCreate.cs" />
+    <Compile Include="DisplayModels\Dealership\DealershipDetail.cs" />
+    <Compile Include="DisplayModels\Dealership\DealershipEdit.cs" />
+    <Compile Include="DisplayModels\Dealership\DealershipListItem.cs" />
+    <Compile Include="DisplayModels\SalesPerson\SalesPersonCreate.cs" />
+    <Compile Include="DisplayModels\SalesPerson\SalesPersonDetail.cs" />
+    <Compile Include="DisplayModels\SalesPerson\SalesPersonEdit.cs" />
+    <Compile Include="DisplayModels\SalesPerson\SalesPersonListItem.cs" />
+    <Compile Include="DisplayModels\Transaction\TransactionCreate.cs" />
+    <Compile Include="DisplayModels\Transaction\TransactionDetail.cs" />
+    <Compile Include="DisplayModels\Transaction\TransactionEdit.cs" />
+    <Compile Include="DisplayModels\Transaction\TransactionListItem.cs" />
+    <Compile Include="DisplayModels\Vehicle\VehicleCreate.cs" />
+    <Compile Include="DisplayModels\Vehicle\VehicleDetail.cs" />
+    <Compile Include="DisplayModels\Vehicle\VehicleEdit.cs" />
+    <Compile Include="DisplayModels\Vehicle\VehicleListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DisplayModels\Customer\" />
-    <Folder Include="DisplayModels\Dealership\" />
-    <Folder Include="DisplayModels\SalesPerson\" />
-    <Folder Include="DisplayModels\Transaction\" />
-    <Folder Include="DisplayModels\Vehicle\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
