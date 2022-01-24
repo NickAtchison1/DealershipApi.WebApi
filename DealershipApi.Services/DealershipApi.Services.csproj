@@ -65,5 +65,19 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DealershipApi.Data\DealershipApi.Data.csproj">
+      <Project>{aa9a7cd1-782b-48ec-bda6-277ec9bedc6b}</Project>
+      <Name>DealershipApi.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DealershipApi.Models\DealershipApi.Models.csproj">
+      <Project>{2e3ba0d0-65ca-4054-9de8-b0bb150c907d}</Project>
+      <Name>DealershipApi.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DealershipApi.WebApi\DealershipApi.WebApi.csproj">
+      <Project>{0d8078a3-a21e-467f-b066-c70b2e89956c}</Project>
+      <Name>DealershipApi.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
