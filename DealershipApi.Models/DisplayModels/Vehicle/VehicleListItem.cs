@@ -8,5 +8,7 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
 {
     public class VehicleListItem
     {
+        public int Id { get; set; }
+        public string VehicleName { get; set; }
     }
 }
