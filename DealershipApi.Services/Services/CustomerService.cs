@@ -11,19 +11,20 @@ namespace DealershipApi.Services.Services
 {
     public class CustomerService
     {
-        public bool CreateNote(CustomerCreate customer)
+        public bool CreateCustoer(CustomerCreate customer)
         {
             var entity = new Customer()
             {
-                OwnerId = _userId,
-                Title = model.Title,
-                Content = model.Content,
-                CreatedUtc = DateTimeOffset.Now
+                
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Address = customer.Address,
+                Email = customer.Email
             };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Notes.Add(entity);
+                ctx.Customers.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
