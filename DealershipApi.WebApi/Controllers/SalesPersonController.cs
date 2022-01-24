@@ -53,7 +53,15 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(person);
         }
     
+        [HttpDelete]
+        public IHttpActionResult DeleteSalesPerson(int id)
+        {
+            var service = CreateSalesPersonService();
 
+            if (!service.RemoveSalesPerson(id)) return InternalServerError();
+
+            return Ok("Sales person removed!");
+        }
 
     }
 }
