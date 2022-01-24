@@ -46,6 +46,26 @@ namespace DealershipApi.Services.Services
             }
         }
 
+        public SalesPersonDetail GetSalesPersonById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .SalesPeople
+                        .Single(s => s.Id == id);
+
+                return
+                    new SalesPersonDetail
+                    {
+                        Id = entity.Id,
+                        DealershipId = entity.DealerShipID,
+                        FullName = entity.FirstName + " " + entity.LastName,
+                        Email = entity.Email
+                    };
+            }
+        }
+
 
 
     }
