@@ -31,5 +31,20 @@ namespace DealershipApi.Services.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public IEnumerable<SalesPersonListItem> GetSalesPeople()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx.SalesPeople.Select(
+                    s => new SalesPersonListItem
+                    {
+                        FullName = s.FirstName + " " + s.LastName,
+                        Email = s.Email
+                    });
+                return query.ToArray();
+            }
+        }
+
     }
 }
