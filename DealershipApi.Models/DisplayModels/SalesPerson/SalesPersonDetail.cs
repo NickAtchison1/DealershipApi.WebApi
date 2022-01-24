@@ -8,5 +8,8 @@ namespace DealershipApi.Models.DisplayModels.SalesPerson
 {
     public class SalesPersonDetail
     {
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
     }
 }
