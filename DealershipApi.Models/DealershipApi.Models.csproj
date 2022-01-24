@@ -80,5 +80,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DealershipApi.Data\DealershipApi.Data.csproj">
+      <Project>{AA9A7CD1-782B-48EC-BDA6-277EC9BEDC6B}</Project>
+      <Name>DealershipApi.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
