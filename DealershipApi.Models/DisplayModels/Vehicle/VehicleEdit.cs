@@ -17,6 +17,6 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public decimal InvoicePrice { get; set; }
         [ForeignKey(nameof(Dealership))]
         public int DealershipId { get; set; }
-        public virtual Dealership Dealership { get; set; }
+       // public virtual Dealership Dealership { get; set; }
     }
 }
