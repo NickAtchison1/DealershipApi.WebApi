@@ -26,7 +26,15 @@ namespace DealershipApi.WebApi.Controllers
 
         public IHttpActionResult CreateSalesPerson(SalesPersonCreate model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            var salesperson = CreateSalesPersonService();
+
+            if (!salesperson.CreateSalesPerson(model)) return InternalServerError();
+
+            return Ok(salesperson);
         }
+
+
     }
 }
