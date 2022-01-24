@@ -8,5 +8,6 @@ namespace DealershipApi.Services.Services
 {
     public class SalesPersonService
     {
+
     }
 }
