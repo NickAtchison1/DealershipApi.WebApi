@@ -11,9 +11,7 @@ namespace DealershipApi.Services.Services
 {
     public class CustomerService
     {
-        private readonly int _userId;
-
-        public CustomerService(int userId)
+        public bool CreateNote(CustomerCreate customer)
         {
             _userId = userId;
         }
@@ -84,10 +82,7 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Customers.Single(e => e.Id == id);
-
-                ctx.Customers.Remove(entity);
-
+                ctx.Notes.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
         }
