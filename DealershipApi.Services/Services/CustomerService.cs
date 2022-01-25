@@ -35,7 +35,7 @@ namespace DealershipApi.Services.Services
                     .Select(d => new CustomerListItem()
                     {
                         CustomerId = d.Id,
-                    //    FullName = d.FullName,
+                        FullName = d.FullName.ToString(),
                         Address = d.Address,
                         Email = d.Email
                     });

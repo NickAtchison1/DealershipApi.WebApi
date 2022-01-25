@@ -36,6 +36,9 @@
                 new Customer {FirstName = "Jessica", LastName = "Green", Address = "847 Hazel Dell Road", Email = "jgreen@fakeemail.com"}
             };
 
+
+            customers.ForEach(s => context.Customers.AddOrUpdate(p => p.Id, s));
+            context.SaveChanges();
             //  customers.ForEach(c => context.Customers.AddOrUpdate())
 
             var dealerships = new List<Dealership>
@@ -45,6 +48,8 @@
                 new Dealership { Name = "Shay's Car Emporium North" , Address = "123 North Street"},
                 new Dealership { Name = "Shay's Car Emporium South" , Address = "123 South Street"},
             };
+            dealerships.ForEach(s => context.Dealerships.AddOrUpdate(p => p.Id, s));
+            context.SaveChanges();
 
             var salesPeople = new List<SalesPerson>
             {
@@ -57,6 +62,9 @@
                 new SalesPerson {FirstName = "Larry", LastName="David", Email = "ldavid@ShaysFakeEmail.com", DealerShipId = dealerships.Single(d => d.Name == "Shay's Car Emporium South").Id },
                 new SalesPerson {FirstName = "Reggie", LastName="Miller", Email = "rmiller@ShaysFakeEmail.com", DealerShipId = dealerships.Single(d => d.Name == "Shay's Car Emporium South").Id },
             };
+
+            salesPeople.ForEach(s => context.SalesPeople.AddOrUpdate(p => p.Id, s));
+            context.SaveChanges();
 
             var vehicles = new List<Vehicle>
             {
@@ -102,26 +110,14 @@
                 new Vehicle { Make ="Cheverolet", Model="Malibu", ModelYear=2014, Color="Black", InvoicePrice=7500, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium South").Id },
                 new Vehicle { Make ="Toyota", Model="Camry", ModelYear=2018, Color="White", InvoicePrice=7500, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium South").Id },
             };
-
-            //var transcations = new List<Transaction>
-            //{
-            //    new Transaction
-            //    { VehicleId = vehicles.Single(v => v.VehicleName == "2018 + Jeep + Wrangler" ).Id,
-            //      CustomerId = customers.Single(c => c.FullName == "Chuck Norris").Id,
+            vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => p.Id, s));
+            context.SaveChanges();
 
 
-            //    }, 
 
-            }
-
-        //            public int VehicleId { get; set; }
-        //public int CustomerId { get; set; }
-        //public int SalesPersonId { get; set; }
-        //public int DealershipId { get; set; }
-        //public decimal SalesPrice { get; set; }
-        //public DateTime SalesDate { get; set; }
-        //public TransactionType TypeOfTransaction { get; set; }
+        }
     }
-    } // return ($"{ModelYear} + {Make} + {Model}");
 
-//return $"{FirstName} {LastName}";
+
+}
+
