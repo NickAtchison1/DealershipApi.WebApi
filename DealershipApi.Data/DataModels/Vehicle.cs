@@ -25,6 +25,7 @@ namespace DealershipApi.Data.DataModels
         [Required]
         [ForeignKey(nameof(Dealership))]
         public int DealershipId { get; set; }
+        public virtual Dealership Dealership { get; set; }
 
         public string VehicleName
         {
