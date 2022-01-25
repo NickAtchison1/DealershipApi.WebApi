@@ -1,4 +1,5 @@
 ﻿using DealershipApi.Models.DisplayModels.Transaction;
+using DealershipApi.Models.DisplayModels.Vehicle;
 using DealershipApi.Services.Services;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,16 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-   
+   [Authorize]
     public class TransactionController : ApiController
     {
+        private TransactionService CreateTransactionService()
+        {
+
+            var transactionService = new TransactionService();
+            return transactionService;
+        }
+
         public IHttpActionResult Get()
         {
             TransactionService transactionService = CreateTransactionService();
@@ -19,7 +27,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
-        public IHttpActionResult Post(TransactionCreate transaction)
+        public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
         {
             if (!ModelState.IsValid)
             {
@@ -28,7 +36,7 @@ namespace DealershipApi.WebApi.Controllers
 
             var service = CreateTransactionService();
 
-            if (!service.CreateTransaction(transaction))
+            if (!service.CreatePurchaseTransaction(vehicle, transaction))
             {
                 return InternalServerError();
             }
@@ -36,13 +44,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok();
         }
 
-        private TransactionService CreateTransactionService()
-        {
-
-            var transactionService = new TransactionService();
-            return transactionService;
-        }
-
+     
         public IHttpActionResult Get(int id)
         {
             TransactionService transactionService = CreateTransactionService();

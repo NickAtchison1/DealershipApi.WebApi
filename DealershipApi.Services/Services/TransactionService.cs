@@ -11,7 +11,7 @@ namespace DealershipApi.Services.Services
 {
     public class TransactionService
     {
-        public bool CreatePurchaseTransaction(TransactionPurchaseCreate transaction, VehicleCreate model)
+        public bool CreatePurchaseTransaction(VehicleCreate model, TransactionPurchaseCreate transaction)
         {
             var vehicleEntity  = new Vehicle()
             {

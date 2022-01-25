@@ -93,12 +93,28 @@
     <Compile Include="DataModels\SalesPerson.cs" />
     <Compile Include="DataModels\Transaction.cs" />
     <Compile Include="DataModels\Vehicle.cs" />
+    <Compile Include="Migrations\202201251924214_InitialCreate.cs" />
+    <Compile Include="Migrations\202201251924214_InitialCreate.designer.cs">
+      <DependentUpon>202201251924214_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.cs" />
+    <Compile Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.designer.cs">
+      <DependentUpon>202201252036456_RemoveDealerFromApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202201251924214_InitialCreate.resx">
+      <DependentUpon>202201251924214_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.resx">
+      <DependentUpon>202201252036456_RemoveDealerFromApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

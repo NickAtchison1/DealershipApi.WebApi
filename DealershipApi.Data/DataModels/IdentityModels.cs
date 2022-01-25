@@ -16,9 +16,9 @@ namespace DealershipApi.Data.DataModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
       
-        [ForeignKey(nameof(Dealership))]
-        public int DealershipId { get; set; }
-        public virtual Dealership Dealership { get; set; }
+       // [ForeignKey(nameof(Dealership))]
+        //public int DealershipId { get; set; }
+       // public virtual Dealership Dealership { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -51,13 +51,24 @@ namespace DealershipApi.Data.DataModels
             modelBuilder
                 .Conventions
                 .Remove<PluralizingTableNameConvention>();
+               // .Remove<OneToManyCascadeDeleteConvention>();
 
+            
             modelBuilder
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
                 .Add(new IdentityUserRoleConfiguration());
-        }
 
+            //modelBuilder
+            //    .Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            //modelBuilder.Entity<Transaction>()
+            //    .HasRequired(t => t.SalesPerson)
+            //    .WithMany()
+            //    .HasForeignKey(t => t.SalesPersonId)
+            //    .WillCascadeOnDelete(false);
+
+        }
         public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
         {
             public IdentityUserLoginConfiguration()
