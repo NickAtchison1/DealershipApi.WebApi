@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace DealershipApi.Models.DisplayModels.Transaction
 {
-    public class TransactionCreate
+    public class TransactionPurchaseCreate
     {
-        public TransactionType TypeOfTransaction { get; set; }
+        public TransactionType TypeOfTransaction
+        {
+            get { return TransactionType.Purchase; }
+        }
         public int VehicleId { get; set; }
-       // public VehicleCreate VehicleCreate { get; set; }
+    //   public VehicleCreate vehicleCreate { get; set; }
         public int CustomerId { get; set; }
         public int SalesPersonId { get; set; }
         public int DealershipId { get; set; }

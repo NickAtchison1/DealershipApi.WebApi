@@ -1,5 +1,6 @@
 ﻿using DealershipApi.Data.DataModels;
 using DealershipApi.Models.DisplayModels.Transaction;
+using DealershipApi.Models.DisplayModels.Vehicle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,26 @@ namespace DealershipApi.Services.Services
 {
     public class TransactionService
     {
-        public bool CreateTransaction(TransactionCreate transaction)
+        public bool CreatePurchaseTransaction(TransactionPurchaseCreate transaction, VehicleCreate model)
         {
+            var vehicleEntity  = new Vehicle()
+            {
+                Make = model.Make,
+                Model = model.Model,
+                ModelYear = model.ModelYear,
+                Color = model.Color,
+                InvoicePrice = model.InvoicePrice,
+                DealershipId = model.DealershipId,
+            };
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Vehicles.Add(vehicleEntity);
+            }
+
             var entity = new Transaction()
             {
                 TypeOfTransaction = transaction.TypeOfTransaction,
-                VehicleId = transaction.VehicleId,
+                VehicleId = vehicleEntity.Id,
                 CustomerId = transaction.CustomerId,
                 SalesPersonId = transaction.SalesPersonId,
                 DealershipId = transaction.DealershipId,

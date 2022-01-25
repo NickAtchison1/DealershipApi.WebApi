@@ -19,7 +19,8 @@ namespace DealershipApi.Data.DataModels
         public string Email { get; set; }
 
         [ForeignKey (nameof(Dealership))]
-        public int DealerShipID { get; set; }
+        public int DealerShipId { get; set; }
+        public virtual Dealership Dealership { get; set; }
         public string FullName
         {
             get

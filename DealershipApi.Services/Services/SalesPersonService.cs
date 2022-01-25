@@ -59,7 +59,7 @@ namespace DealershipApi.Services.Services
                     new SalesPersonDetail
                     {
                         Id = entity.Id,
-                        DealershipId = entity.DealerShipID,
+                        DealershipId = entity.DealerShipId,
                         FullName = entity.FirstName + " " + entity.LastName,
                         Email = entity.Email
                     };
