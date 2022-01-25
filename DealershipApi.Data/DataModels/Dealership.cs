@@ -13,7 +13,7 @@ namespace DealershipApi.Data.DataModels
         public string Address { get; set; }
 
         public virtual ICollection<SalesPerson> SalesPersons { get; set;}
-        public virtual ICollection<Vehicle> Vehicles { get;}
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
         public virtual ICollection<Transaction> Transactions { get;}
     }
 }
