@@ -32,6 +32,7 @@ namespace DealershipApi.Services.Services
                 var query = ctx.Dealerships
                     .Select(d => new DealershipListItem()
                     {
+                        DealershipId = d.Id,
                         DealershipName = d.Name,
                         Address = d.Address
                     });
