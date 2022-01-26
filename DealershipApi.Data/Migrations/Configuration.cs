@@ -111,6 +111,7 @@
                 new Vehicle { Make ="Toyota", Model="Camry", ModelYear=2018, Color="White", InvoicePrice=7500, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium South").Id, InStock = true },
             };
             vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => p.Id, s));
+            vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => p.VehicleName, s));
             context.SaveChanges();
 
 
