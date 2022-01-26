@@ -41,7 +41,7 @@ namespace DealershipApi.Services.Services
                             new VehicleListItem
                             {
                                 Id = v.Id,
-                                VehicleName = v.ModelYear + " " + v.Make + " " + v.Model
+                                VehicleName = v.VehicleName
                             }
                         );
                 return query.ToArray();
