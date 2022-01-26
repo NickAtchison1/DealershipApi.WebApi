@@ -9,6 +9,7 @@ namespace DealershipApi.Data.DataModels
 {
     public class Customer
     {
+        private string _fullName;
         [Key]
         public int Id { get; set; }
         [Required]
@@ -23,8 +24,10 @@ namespace DealershipApi.Data.DataModels
         {
             get
             {
-                return $"{FirstName} {LastName}";
+                _fullName = $"{FirstName} {LastName}";
+                return _fullName;
             }
+            set { _fullName = value; }
         }
     }
 }
