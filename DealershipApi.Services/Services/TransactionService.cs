@@ -19,7 +19,7 @@ namespace DealershipApi.Services.Services
                 Model = model.Model,
                 ModelYear = model.ModelYear,
                 Color = model.Color,
-                InvoicePrice = model.InvoicePrice,
+                InvoicePrice = model.SalesPrice,
                 DealershipId = model.DealershipId,
             };
             using (var ctx = new ApplicationDbContext())
@@ -42,6 +42,39 @@ namespace DealershipApi.Services.Services
             {
                 ctx.Transactions.Add(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool CreateTransferTransaction(TransactionPurchaseCreate transfer)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                string Purchase = ((TransactionType)(2)).ToString();
+                var transaction = new Transaction()
+                {
+                    TypeOfTransaction = TransactionType.Purchase,
+                    VehicleId = transfer.VehicleId,
+                    CustomerId = transfer.CustomerId,
+                    SalesPersonId = transfer.SalesPersonId,
+                    DealershipId = transfer.DealershipId,
+                    SalesPrice = transfer.SalesPrice,
+                    SalesDate = transfer.SalesDate
+                };
+
+                ctx.Transactions.Add(transaction);
+
+                var entity =
+                    ctx
+                        .Vehicles
+                        .Single(v => v.Id == transfer.VehicleId);
+
+                entity.Id = transfer.VehicleId;
+                entity.DealershipId = transfer.DealershipId;
+
+                ctx.Vehicles.Add(entity);
+
+
+                return ctx.SaveChanges() == 2;
             }
         }
 

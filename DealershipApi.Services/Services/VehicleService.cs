@@ -19,7 +19,7 @@ namespace DealershipApi.Services.Services
                     Model = model.Model,
                     ModelYear = model.ModelYear,
                     Color = model.Color,
-                    InvoicePrice = model.InvoicePrice,
+                    InvoicePrice = model.SalesPrice,
                     DealershipId = model.DealershipId,
                 };
             using (var ctx = new ApplicationDbContext())
@@ -65,7 +65,7 @@ namespace DealershipApi.Services.Services
                         Model = entity.Model,
                         ModelYear = entity.ModelYear,
                         Color = entity.Color,
-                        InvoicePrice = entity.InvoicePrice,
+                        SalesPrice = entity.InvoicePrice,
                         DealershipId = entity.DealershipId,
                     };
             }
@@ -85,7 +85,7 @@ namespace DealershipApi.Services.Services
                 entity.Model = model.Model;
                 entity.ModelYear = model.ModelYear;
                 entity.Color = model.Color;
-                entity.InvoicePrice = model.InvoicePrice;
+                entity.InvoicePrice = model.SalesPrice;
                 entity.DealershipId = model.DealershipId;
 
                 return ctx.SaveChanges() == 1;
