@@ -70,11 +70,7 @@ namespace DealershipApi.Services.Services
 
                 entity.Id = transfer.VehicleId;
                 entity.DealershipId = transfer.DealershipId;
-
-                ctx.Vehicles.Add(entity);
-
-
-                return ctx.SaveChanges() == 2;
+                return ctx.SaveChanges() > 0;
             }
         }
 
