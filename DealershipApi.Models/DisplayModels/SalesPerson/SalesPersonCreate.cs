@@ -17,6 +17,8 @@ namespace DealershipApi.Models.DisplayModels.SalesPerson
         [MaxLength(128, ErrorMessage = "Last names can only be 128 charachters")]
         public string LastName { get; set; }
         public string Email { get; set; }
+        [Required]
+        public int DealerShipId { get; set; }
 
     }
 }

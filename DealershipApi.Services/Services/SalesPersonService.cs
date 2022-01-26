@@ -22,7 +22,8 @@ namespace DealershipApi.Services.Services
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Email = model.Email
+                Email = model.Email,
+                DealerShipId = model.DealerShipId,
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -39,8 +40,10 @@ namespace DealershipApi.Services.Services
                 var query = ctx.SalesPeople.Select(
                     s => new SalesPersonListItem
                     {
+                        SalesPersonId = s.Id,
                         FullName = s.FirstName + " " + s.LastName,
-                        Email = s.Email
+                        Email = s.Email,
+                        DealerShipId = s.DealerShipId,
                     });
                 return query.ToArray();
             }
@@ -78,6 +81,8 @@ namespace DealershipApi.Services.Services
                 entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
                 entity.Email = model.Email;
+                entity.Id = model.Id;
+                entity.DealerShipId = model.DealerShipId;
 
                 return ctx.SaveChanges() > 0;
             }
