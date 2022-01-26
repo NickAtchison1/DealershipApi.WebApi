@@ -11,8 +11,9 @@ namespace DealershipApi.Models.DisplayModels.Transaction
     public class TransactionCreate
     {
         public TransactionType TypeOfTransaction { get; set; }
+        public VehicleCreate Vehicle { get; set; }
         public int VehicleId { get; set; }
-       // public VehicleCreate VehicleCreate { get; set; }
+        //   public VehicleCreate vehicleCreate { get; set; }
         public int CustomerId { get; set; }
         public int SalesPersonId { get; set; }
         public int DealershipId { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -69,6 +70,12 @@ namespace DealershipApi.Data.DataModels
             //    .WillCascadeOnDelete(false);
 
         }
+
+        public Task aveChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>
         {
             public IdentityUserLoginConfiguration()
