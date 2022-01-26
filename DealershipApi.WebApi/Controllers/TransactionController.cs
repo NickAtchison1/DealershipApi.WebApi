@@ -68,6 +68,7 @@ namespace DealershipApi.WebApi.Controllers
 
             return Ok();
         }
+
         [HttpPost]
         // [Route("api/Transfer/{int: dealershipId}")]
         public IHttpActionResult Transfer([FromBody]TransactionPurchaseCreate transactionId)
@@ -85,6 +86,23 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             return Ok();
+        }
+
+        public IHttpActionResult Sale(TransactionPurchaseCreate sale)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateTransactionService();
+            
+            if (!service.CreateSaleTransaction(sale))
+            {
+                return InternalServerError();
+            }
+
+            return Ok("Good sale!");
         }
 
         public IHttpActionResult Delete(int id)
