@@ -27,7 +27,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
-       /* public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
+        public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             return Ok();
-        } */
+        }
 
      
         public IHttpActionResult Get(int id)
