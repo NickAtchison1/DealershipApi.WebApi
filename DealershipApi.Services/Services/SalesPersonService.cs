@@ -41,7 +41,7 @@ namespace DealershipApi.Services.Services
                     s => new SalesPersonListItem
                     {
                         SalesPersonId = s.Id,
-                        FullName = s.FirstName + " " + s.LastName,
+                        FullName = s.FullName,
                         Email = s.Email,
                         DealerShipId = s.DealerShipId,
                     });
@@ -63,7 +63,7 @@ namespace DealershipApi.Services.Services
                     {
                         Id = entity.Id,
                         DealershipId = entity.DealerShipId,
-                        FullName = entity.FirstName + " " + entity.LastName,
+                        FullName = entity.FullName,
                         Email = entity.Email
                     };
             }

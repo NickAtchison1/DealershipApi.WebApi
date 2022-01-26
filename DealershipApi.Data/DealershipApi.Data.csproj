@@ -109,6 +109,10 @@
     <Compile Include="Migrations\202201261949306_AddVehicleName.designer.cs">
       <DependentUpon>202201261949306_AddVehicleName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201262007346_UpdatedFullName.cs" />
+    <Compile Include="Migrations\202201262007346_UpdatedFullName.designer.cs">
+      <DependentUpon>202201262007346_UpdatedFullName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -128,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201261949306_AddVehicleName.resx">
       <DependentUpon>202201261949306_AddVehicleName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201262007346_UpdatedFullName.resx">
+      <DependentUpon>202201262007346_UpdatedFullName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
