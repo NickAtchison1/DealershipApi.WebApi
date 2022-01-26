@@ -27,22 +27,22 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
-        public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var service = CreateTransactionService();
+        //    var service = CreateTransactionService();
 
-            if (!service.CreatePurchaseTransaction(vehicle, transaction))
-            {
-                return InternalServerError();
-            }
+        //    if (!service.CreatePurchaseTransaction(vehicle, transaction))
+        //    {
+        //        return InternalServerError();
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
      
         public IHttpActionResult Get(int id)
@@ -70,7 +70,7 @@ namespace DealershipApi.WebApi.Controllers
         }
 
         [HttpPost]
-        // [Route("api/Transfer/{int: dealershipId}")]
+        [Route("api/Transaction/Transfer")]
         public IHttpActionResult Transfer([FromBody]TransactionPurchaseCreate transactionId)
         {
             if (!ModelState.IsValid)
@@ -87,7 +87,8 @@ namespace DealershipApi.WebApi.Controllers
 
             return Ok();
         }
-
+        [HttpPost]
+        [Route("api/Transaction/Sale")]
         public IHttpActionResult Sale(TransactionPurchaseCreate sale)
         {
             if (!ModelState.IsValid)
