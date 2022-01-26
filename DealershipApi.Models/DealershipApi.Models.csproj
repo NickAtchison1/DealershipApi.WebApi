@@ -69,6 +69,7 @@
     <Compile Include="DisplayModels\SalesPerson\SalesPersonDetail.cs" />
     <Compile Include="DisplayModels\SalesPerson\SalesPersonEdit.cs" />
     <Compile Include="DisplayModels\SalesPerson\SalesPersonListItem.cs" />
+    <Compile Include="DisplayModels\Dealership\InventoryListItem.cs" />
     <Compile Include="DisplayModels\Transaction\TransactionCreate.cs" />
     <Compile Include="DisplayModels\Transaction\TransactionDetail.cs" />
     <Compile Include="DisplayModels\Transaction\TransactionEdit.cs" />

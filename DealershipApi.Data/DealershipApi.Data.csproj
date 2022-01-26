@@ -101,6 +101,10 @@
     <Compile Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.designer.cs">
       <DependentUpon>202201252036456_RemoveDealerFromApplicationUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201261905566_InStockBoolAdded.cs" />
+    <Compile Include="Migrations\202201261905566_InStockBoolAdded.designer.cs">
+      <DependentUpon>202201261905566_InStockBoolAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -114,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.resx">
       <DependentUpon>202201252036456_RemoveDealerFromApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201261905566_InStockBoolAdded.resx">
+      <DependentUpon>202201261905566_InStockBoolAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

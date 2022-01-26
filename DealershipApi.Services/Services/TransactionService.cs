@@ -74,6 +74,35 @@ namespace DealershipApi.Services.Services
             }
         }
 
+        public bool CreateSaleTransaction(TransactionPurchaseCreate sale)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                
+                var transaction = new Transaction()
+                {
+                    TypeOfTransaction = TransactionType.Sale,
+                    VehicleId = sale.VehicleId,
+                    CustomerId = sale.CustomerId,
+                    SalesPersonId = sale.SalesPersonId,
+                    DealershipId = sale.DealershipId,
+                    SalesPrice = sale.SalesPrice,
+                    SalesDate = sale.SalesDate
+                };
+
+                ctx.Transactions.Add(transaction);
+
+                var entity =
+                    ctx
+                        .Vehicles
+                        .Single(v => v.Id == sale.VehicleId);
+
+                entity.Id = sale.VehicleId;
+                entity.InStock = false;                
+                return ctx.SaveChanges() > 0;
+            }
+        }
+
         public IEnumerable<TransactionListItem> GetTransactions()
         {
             using (var ctx = new ApplicationDbContext())
