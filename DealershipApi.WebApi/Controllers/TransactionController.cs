@@ -27,24 +27,27 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
-        //public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpPost]
+        [Route("api/Transaction/Purchase")]
+        public IHttpActionResult Purchase(TransactionCreate transaction)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var service = CreateTransactionService();
+            var service = CreateTransactionService();
+            service.CreatePurchaseTransaction(transaction);
 
-        //    if (!service.CreatePurchaseTransaction(vehicle, transaction))
-        //    {
-        //        return InternalServerError();
-        //    }
+            //if (!service.CreatePurchaseTransaction(transaction))
+            //{
+            //    return InternalServerError();
+            //}
 
-        //    return Ok();
-        //}
+            return Ok("Purchase Complete");
+        }
 
-     
+
         public IHttpActionResult Get(int id)
         {
             TransactionService transactionService = CreateTransactionService();
