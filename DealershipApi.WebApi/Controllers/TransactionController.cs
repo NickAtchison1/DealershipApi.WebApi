@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-   [Authorize]
+   // [Authorize]
     public class TransactionController : ApiController
     {
         private TransactionService CreateTransactionService()
@@ -27,7 +27,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
-        public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
+       /* public IHttpActionResult Post(VehicleCreate vehicle, TransactionPurchaseCreate transaction)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             return Ok();
-        }
+        } */
 
      
         public IHttpActionResult Get(int id)
@@ -62,6 +62,24 @@ namespace DealershipApi.WebApi.Controllers
             var service = CreateTransactionService();
 
             if (!service.UpdateTransaction(transaction))
+            {
+                return InternalServerError();
+            }
+
+            return Ok();
+        }
+        [HttpPost]
+        // [Route("api/Transfer/{int: dealershipId}")]
+        public IHttpActionResult Transfer([FromBody]TransactionPurchaseCreate transactionId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateTransactionService();
+
+            if (!service.CreateTransferTransaction(transactionId))
             {
                 return InternalServerError();
             }

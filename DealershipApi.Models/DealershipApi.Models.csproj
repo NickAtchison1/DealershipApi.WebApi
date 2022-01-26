@@ -74,10 +74,12 @@
     <Compile Include="DisplayModels\Transaction\TransactionEdit.cs" />
     <Compile Include="DisplayModels\Transaction\TransactionListItem.cs" />
     <Compile Include="DisplayModels\Transaction\TransactionPurchaseCreate.cs" />
+    <Compile Include="DisplayModels\Transaction\TransactionTransferCreate.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleCreate.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleDetail.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleEdit.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleListItem.cs" />
+    <Compile Include="DisplayModels\Vehicle\VehicleTransferDisplay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
