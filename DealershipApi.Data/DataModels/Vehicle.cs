@@ -10,7 +10,7 @@ namespace DealershipApi.Data.DataModels
 {
     public class Vehicle
     {
-        private string _vehicleName; 
+        private string _vehicleName;
         [Key]
         public int Id { get; set; }
         [Required]
@@ -30,12 +30,12 @@ namespace DealershipApi.Data.DataModels
 
         public bool InStock { get; set; }
 
+
         public string VehicleName
         {
             get
-            {
-                _vehicleName = $"{ModelYear} {Make} {Model}";
-                return _vehicleName;
+            { _vehicleName = $"{ModelYear} {Make} {Model}";
+               return _vehicleName;
             }
             set { _vehicleName = value; }
         }

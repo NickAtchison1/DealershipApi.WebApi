@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class SalesPersonController : ApiController
     {
 
@@ -26,6 +26,14 @@ namespace DealershipApi.WebApi.Controllers
             SalesPersonService s = CreateSalesPersonService();
             var salespeople = s.GetSalesPeople();
             return Ok(salespeople);
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            SalesPersonService SalesPersonService = CreateSalesPersonService();
+            var salesPerson = SalesPersonService.GetSalesPersonById(id);
+            return Ok(salesPerson);
         }
 
         [HttpPost]

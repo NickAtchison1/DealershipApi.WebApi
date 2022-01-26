@@ -57,8 +57,8 @@ namespace DealershipApi.Services.Services
                     CustomerId = transfer.CustomerId,
                     SalesPersonId = transfer.SalesPersonId,
                     DealershipId = transfer.DealershipId,
-                    SalesPrice = transfer.SalesPrice,
-                    SalesDate = transfer.SalesDate
+                    SalesPrice = 0,
+                    SalesDate = DateTime.Today
                 };
 
                 ctx.Transactions.Add(transaction);

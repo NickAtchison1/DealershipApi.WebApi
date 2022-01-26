@@ -17,7 +17,7 @@ namespace DealershipApi.WebApi.Controllers
         }
         
         [HttpGet]
-        [Route("api/InStock")]
+        [Route("api/Inventory/InStock")]
         public IHttpActionResult InStock()
         {
             InventoryListItemService iliservice = CreateInventoryListItemService();
@@ -26,7 +26,7 @@ namespace DealershipApi.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/NotInStock")]
+        [Route("api/Inventory/NotInStock")]
         public IHttpActionResult NotInStock()
         {
             InventoryListItemService iliservice = CreateInventoryListItemService();
@@ -35,7 +35,7 @@ namespace DealershipApi.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/AllStock")]
+        [Route("api/Inventory/AllStock")]
         public IHttpActionResult AllInStock()
         {
             InventoryListItemService iliservice = CreateInventoryListItemService();
