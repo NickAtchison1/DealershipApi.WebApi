@@ -68,8 +68,8 @@ namespace DealershipApi.Services.Services
                 entity.LastName = customer.LastName;
                 entity.Address = customer.Address;
                 entity.Email = customer.Email;
-
                 return ctx.SaveChanges() == 1;
+
             }
         }
 
