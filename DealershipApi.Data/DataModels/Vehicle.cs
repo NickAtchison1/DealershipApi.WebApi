@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace DealershipApi.Data.DataModels
 {
+    public enum VehicleCondition
+    {
+        New = 1,
+        Used
+    }
     public class Vehicle
     {
         private string _vehicleName;
@@ -29,7 +34,8 @@ namespace DealershipApi.Data.DataModels
         public virtual Dealership Dealership { get; set; }
 
         public bool InStock { get; set; }
-
+        public VehicleCondition VehicleCondition { get; set; }
+        public double Mileage { get; set; }
 
         public string VehicleName
         {
