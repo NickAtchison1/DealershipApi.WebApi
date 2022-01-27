@@ -13,12 +13,16 @@ namespace DealershipApi.Data.DataModels
         [Key]
         public int Id { get; set; }
         [Required]
+        [MaxLength(25)]
         public string FirstName { get; set; }
         [Required]
+        [MaxLength(25)]
         public string LastName { get; set; }
         [Required]
+        [MaxLength(35)]
         public string Address { get; set; }
         [Required]
+        [MaxLength(25)]
         public string Email { get; set; }
         public string FullName
         {
@@ -27,6 +31,7 @@ namespace DealershipApi.Data.DataModels
                 _fullName = $"{FirstName} {LastName}";
                 return _fullName;
             }
+
             set { _fullName = value; }
         }
     }
