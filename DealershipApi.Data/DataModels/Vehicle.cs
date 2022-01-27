@@ -20,7 +20,7 @@ namespace DealershipApi.Data.DataModels
         [MaxLength(15)]
         public string Model { get; set; }
         [Required]
-        [Range (1980,2050)]
+        [Range (1950,2050)]
         public int ModelYear { get; set; }
         [Required]
         [MaxLength(25)]
