@@ -11,37 +11,46 @@ namespace DealershipApi.Services.Services
 {
     public class TransactionService
     {
-        public bool CreatePurchaseTransaction(VehicleCreate model, TransactionPurchaseCreate transaction)
+        public void CreatePurchaseTransaction(TransactionCreate model)
         {
-            var vehicleEntity  = new Vehicle()
+            var vehicleEntity = new Vehicle()
             {
-                Make = model.Make,
-                Model = model.Model,
-                ModelYear = model.ModelYear,
-                Color = model.Color,
-                InvoicePrice = model.SalesPrice,
-                DealershipId = model.DealershipId,
+                Make = model.Vehicle.Make,
+                Model = model.Vehicle.Model,
+                ModelYear = model.Vehicle.ModelYear,
+                Color = model.Vehicle.Color,
+                InvoicePrice = model.Vehicle.SalesPrice,
+                DealershipId = model.Vehicle.DealershipId,
+                InStock = true
             };
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Vehicles.Add(vehicleEntity);
+                 ctx.SaveChanges();
             }
-
-            var entity = new Transaction()
-            {
-                TypeOfTransaction = transaction.TypeOfTransaction,
-                VehicleId = vehicleEntity.Id,
-                CustomerId = transaction.CustomerId,
-                SalesPersonId = transaction.SalesPersonId,
-                DealershipId = transaction.DealershipId,
-                SalesPrice = transaction.SalesPrice,
-                SalesDate = transaction.SalesDate
-            };
 
             using (var ctx = new ApplicationDbContext())
             {
+                var newVehicle =
+                    ctx
+                        .Vehicles
+                        .Single(v => v.Id == vehicleEntity.Id);
+            
+
+            var entity = new Transaction()
+            {
+                TypeOfTransaction = model.TypeOfTransaction,
+                VehicleId = newVehicle.Id,
+                CustomerId = model.CustomerId,
+                SalesPersonId = model.SalesPersonId,
+                DealershipId = newVehicle.DealershipId,
+                SalesPrice = newVehicle.InvoicePrice,
+                SalesDate = model.SalesDate
+            };
+
+           
                 ctx.Transactions.Add(entity);
-                return ctx.SaveChanges() == 1;
+                 ctx.SaveChanges();
             }
         }
 
@@ -49,10 +58,10 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                string Purchase = ((TransactionType)(2)).ToString();
+               
                 var transaction = new Transaction()
                 {
-                    TypeOfTransaction = TransactionType.Purchase,
+                    TypeOfTransaction = TransactionType.Transfer,
                     VehicleId = transfer.VehicleId,
                     CustomerId = transfer.CustomerId,
                     SalesPersonId = transfer.SalesPersonId,

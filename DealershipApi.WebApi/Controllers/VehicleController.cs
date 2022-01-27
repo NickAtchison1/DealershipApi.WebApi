@@ -58,7 +58,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             return Ok();
-        }
+        }*/
 
         [HttpPut]
         public IHttpActionResult Put(VehicleEdit vehicle)
