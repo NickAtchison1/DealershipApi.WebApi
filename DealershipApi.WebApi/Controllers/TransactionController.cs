@@ -29,7 +29,7 @@ namespace DealershipApi.WebApi.Controllers
 
         [HttpPost]
         [Route("api/Transaction/UsedPurchase")]
-        public IHttpActionResult Purchase(TransactionCreate transaction)
+        public IHttpActionResult UsedPurchase(TransactionCreate transaction)
         {
             if (!ModelState.IsValid)
             {
@@ -38,6 +38,26 @@ namespace DealershipApi.WebApi.Controllers
 
             var service = CreateTransactionService();
             service.CreateUsedVehiclePurchaseTransaction(transaction);
+
+            //if (!service.CreatePurchaseTransaction(transaction))
+            //{
+            //    return InternalServerError();
+            //}
+
+            return Ok("Purchase Complete");
+        }
+
+        [HttpPost]
+        [Route("api/Transaction/NewPurchase")]
+        public IHttpActionResult NewPurchase(TransactionCreate transaction)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateTransactionService();
+            service.CreateNewVehiclePurchaseTransaction(transaction);
 
             //if (!service.CreatePurchaseTransaction(transaction))
             //{
