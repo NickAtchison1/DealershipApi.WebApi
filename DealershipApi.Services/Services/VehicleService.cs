@@ -10,7 +10,7 @@ namespace DealershipApi.Services.Services
 {
     public class VehicleService
     {
-        /*public bool CreateVehicle(VehicleCreate model)
+        public bool CreateVehicle(VehicleCreate model)
         {
             var entity =
                 new Vehicle()
@@ -27,7 +27,7 @@ namespace DealershipApi.Services.Services
                 ctx.Vehicles.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-        }*/
+        }
 
         public IEnumerable<VehicleListItem> GetVehicles()
         {
