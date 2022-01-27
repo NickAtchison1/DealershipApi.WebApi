@@ -33,7 +33,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(vehicle);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public IHttpActionResult Post(VehicleCreate vehicle)
         {
             if (!ModelState.IsValid)
@@ -49,7 +49,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             return Ok();
-        }
+        }*/
 
         [HttpPut]
         public IHttpActionResult Put(VehicleEdit vehicle)
