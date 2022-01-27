@@ -58,10 +58,10 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                string Purchase = ((TransactionType)(2)).ToString();
+               
                 var transaction = new Transaction()
                 {
-                    TypeOfTransaction = TransactionType.Purchase,
+                    TypeOfTransaction = TransactionType.Transfer,
                     VehicleId = transfer.VehicleId,
                     CustomerId = transfer.CustomerId,
                     SalesPersonId = transfer.SalesPersonId,
