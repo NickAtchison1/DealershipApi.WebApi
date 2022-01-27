@@ -3,17 +3,30 @@ using DealershipApi.Models.DisplayModels.Transaction;
 using DealershipApi.Models.DisplayModels.Vehicle;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DealershipApi.Services.Services
 {
+    public static class EnumExtensions
+    {
+        public static string GetDisplayName(this Enum enumValue)
+        {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetName();
+        }
+    }
     public class TransactionService
     {
         public bool CreatePurchaseTransaction(VehicleCreate model, TransactionPurchaseCreate transaction)
         {
-            var vehicleEntity  = new Vehicle()
+            var vehicleEntity = new Vehicle()
             {
                 Make = model.Make,
                 Model = model.Model,
@@ -49,10 +62,9 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                string Purchase = ((TransactionType)(2)).ToString();
                 var transaction = new Transaction()
                 {
-                    TypeOfTransaction = TransactionType.Purchase,
+                    TypeOfTransaction = TransactionType.Transfer,
                     VehicleId = transfer.VehicleId,
                     CustomerId = transfer.CustomerId,
                     SalesPersonId = transfer.SalesPersonId,
@@ -78,7 +90,7 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                
+
                 var transaction = new Transaction()
                 {
                     TypeOfTransaction = TransactionType.Sale,
@@ -98,7 +110,7 @@ namespace DealershipApi.Services.Services
                         .Single(v => v.Id == sale.VehicleId);
 
                 entity.Id = sale.VehicleId;
-                entity.InStock = false;                
+                entity.InStock = false;
                 return ctx.SaveChanges() > 0;
             }
         }

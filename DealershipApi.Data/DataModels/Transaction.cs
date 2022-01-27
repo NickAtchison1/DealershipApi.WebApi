@@ -10,8 +10,11 @@ namespace DealershipApi.Data.DataModels
 {
     public enum TransactionType
     {
+        [Display(Name = "Sale")]
         Sale = 1,
+        [Display(Name = "Purchase")]
         Purchase,
+        [Display(Name = "Transfer")]
         Transfer
     }
     public class Transaction
