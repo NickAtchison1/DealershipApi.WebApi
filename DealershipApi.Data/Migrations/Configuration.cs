@@ -51,6 +51,21 @@
             dealerships.ForEach(s => context.Dealerships.AddOrUpdate(p => p.Id, s));
             context.SaveChanges();
 
+            var suppliers = new List<Supplier>
+            {
+                new Supplier { Name ="Kia America", SupplierType= SupplierType.Wholeseller, Email = "Kia@fakeemail.com"},
+                new Supplier { Name ="Mazda America", SupplierType= SupplierType.Wholeseller, Email = "Mazda@fakeemail.com"},
+                new Supplier { Name ="Honda America", SupplierType= SupplierType.Wholeseller, Email = "Honda@fakeemail.com"},
+                new Supplier { Name ="Chevy America", SupplierType= SupplierType.Wholeseller, Email = "Chevy@fakeemail.com"},
+                new Supplier { Name ="CJD America", SupplierType= SupplierType.Wholeseller, Email = "CJD@fakeemail.com"},
+                new Supplier { Name ="Brittany Spears", SupplierType= SupplierType.Individual, Email = "bspears@fakeemail.com"},
+                new Supplier { Name ="Jerry Seinfeld", SupplierType= SupplierType.Individual, Email = "jseinfeld@fakeemail.com"},
+                new Supplier { Name ="Bob Sacamano", SupplierType= SupplierType.Individual, Email = "bsacamano@fakeemail.com"},
+                new Supplier { Name ="John Snow", SupplierType= SupplierType.Individual, Email = "jsnow@fakeemail.com"},
+            };
+            suppliers.ForEach(s => context.Suppliers.AddOrUpdate(p => p.Id, s));
+            context.SaveChanges();
+
             var salesPeople = new List<SalesPerson>
             {
                 new SalesPerson {FirstName = "Ryan", LastName="Jenkins", Email = "rjenkins@ShaysFakeEmail.com", DealerShipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Kia Mazda East").Id },
