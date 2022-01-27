@@ -8,18 +8,27 @@ using System.Threading.Tasks;
 
 namespace DealershipApi.Data.DataModels
 {
+    public enum VehicleCondition
+    {
+        New = 1,
+        Used
+    }
     public class Vehicle
     {
         private string _vehicleName;
         [Key]
         public int Id { get; set; }
         [Required]
+        [MaxLength(15)]
         public string Make { get; set; }
         [Required]
+        [MaxLength(15)]
         public string Model { get; set; }
         [Required]
+        [Range (1950,2050)]
         public int ModelYear { get; set; }
         [Required]
+        [MaxLength(25)]
         public string Color { get; set; }
         [Required]
         public decimal InvoicePrice { get; set; }
@@ -29,7 +38,8 @@ namespace DealershipApi.Data.DataModels
         public virtual Dealership Dealership { get; set; }
 
         public bool InStock { get; set; }
-
+        public VehicleCondition VehicleCondition { get; set; }
+        public double Mileage { get; set; }
 
         public string VehicleName
         {

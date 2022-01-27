@@ -91,6 +91,7 @@
     <Compile Include="DataModels\Dealership.cs" />
     <Compile Include="DataModels\IdentityModels.cs" />
     <Compile Include="DataModels\SalesPerson.cs" />
+    <Compile Include="DataModels\Supplier.cs" />
     <Compile Include="DataModels\Transaction.cs" />
     <Compile Include="DataModels\Vehicle.cs" />
     <Compile Include="Migrations\202201251924214_InitialCreate.cs" />

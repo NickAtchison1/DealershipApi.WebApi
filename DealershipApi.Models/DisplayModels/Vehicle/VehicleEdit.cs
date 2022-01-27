@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealershipApi.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public decimal SalesPrice { get; set; }
         [ForeignKey(nameof(Dealership))]
         public int DealershipId { get; set; }
-       // public virtual Dealership Dealership { get; set; }
+        // public virtual Dealership Dealership { get; set; }
+        public VehicleCondition VehicleCondition { get; set; }
+        public double Mileage { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealershipApi.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,5 +24,7 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         [Required]
         [ForeignKey(nameof(Dealership))]
         public int DealershipId { get; set; }
+        public VehicleCondition VehicleCondition { get; set; }
+        public double Mileage { get; set; }
     }
 }

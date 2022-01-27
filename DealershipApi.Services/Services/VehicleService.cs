@@ -10,7 +10,7 @@ namespace DealershipApi.Services.Services
 {
     public class VehicleService
     {
-        public bool CreateVehicle(VehicleCreate model)
+        /*public bool CreateVehicle(VehicleCreate model)
         {
             var entity =
                 new Vehicle()
@@ -27,7 +27,7 @@ namespace DealershipApi.Services.Services
                 ctx.Vehicles.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-        }
+        }*/
 
         public IEnumerable<VehicleListItem> GetVehicles()
         {
@@ -41,6 +41,7 @@ namespace DealershipApi.Services.Services
                             new VehicleListItem
                             {
                                 Id = v.Id,
+                                VehicleCondition = v.VehicleCondition,
                                 VehicleName = v.VehicleName
                             }
                         );
@@ -67,6 +68,8 @@ namespace DealershipApi.Services.Services
                         Color = entity.Color,
                         SalesPrice = entity.InvoicePrice,
                         DealershipId = entity.DealershipId,
+                        VehicleCondition = entity.VehicleCondition,
+                        Mileage = entity.Mileage,
                     };
             }
         }
@@ -87,6 +90,8 @@ namespace DealershipApi.Services.Services
                 entity.Color = model.Color;
                 entity.InvoicePrice = model.SalesPrice;
                 entity.DealershipId = model.DealershipId;
+                entity.VehicleCondition = model.VehicleCondition;
+                entity.Mileage = model.Mileage;
 
                 return ctx.SaveChanges() == 1;
             }
@@ -102,6 +107,25 @@ namespace DealershipApi.Services.Services
                         .Single(v => v.Id == id);
                 ctx.Vehicles.Remove(entity);
                 return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public List<VehicleSearchDetail> SearchVehicles(string car)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx.Vehicles
+                    .Select(v => new VehicleSearchDetail
+                    {
+                        Id = v.Id,
+                        VehicleName = v.VehicleName,
+                        Color = v.Color,
+                        InvoicePrice = v.InvoicePrice
+
+                    }).Where(v => v.VehicleName.ToLower().Contains(car.ToLower()));
+
+                return query.ToList();
+
             }
         }
     }
