@@ -109,5 +109,24 @@ namespace DealershipApi.Services.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public List<VehicleSearchDetail> SearchVehicles(string car)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = ctx.Vehicles
+                    .Select(v => new VehicleSearchDetail
+                    {
+                        Id = v.Id,
+                        VehicleName = v.VehicleName,
+                        Color = v.Color,
+                        InvoicePrice = v.InvoicePrice
+
+                    }).Where(v => v.VehicleName.ToLower().Contains(car.ToLower()));
+
+                return query.ToList();
+
+            }
+        }
     }
 }

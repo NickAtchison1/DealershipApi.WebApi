@@ -14,9 +14,12 @@ namespace DealershipApi.Data.DataModels
         [Key]
         public int Id { get; set; }
         [Required]
+        [MaxLength(25)]
         public string FirstName { get; set; }
         [Required]
+        [MaxLength(25)]
         public string LastName { get; set; }
+        [MaxLength(25)]
         public string Email { get; set; }
 
         [ForeignKey (nameof(Dealership))]
