@@ -11,7 +11,7 @@ namespace DealershipApi.Services.Services
 {
     public class TransactionService
     {
-        public void CreatePurchaseTransaction(TransactionCreate model)
+        public void CreateUsedVehiclePurchaseTransaction(TransactionCreate model)
         {
             var vehicleEntity = new Vehicle()
             {
@@ -21,6 +21,8 @@ namespace DealershipApi.Services.Services
                 Color = model.Vehicle.Color,
                 InvoicePrice = model.Vehicle.SalesPrice,
                 DealershipId = model.Vehicle.DealershipId,
+                VehicleCondition = VehicleCondition.Used,
+                Mileage = model.Vehicle.Mileage,
                 InStock = true
             };
             using (var ctx = new ApplicationDbContext())
@@ -41,8 +43,7 @@ namespace DealershipApi.Services.Services
             {
                 TypeOfTransaction = model.TypeOfTransaction,
                 VehicleId = newVehicle.Id,
-                CustomerId = model.CustomerId,
-                SalesPersonId = model.SalesPersonId,
+                SupplierId = model.SupplierId,
                 DealershipId = newVehicle.DealershipId,
                 SalesPrice = newVehicle.InvoicePrice,
                 SalesDate = model.SalesDate
@@ -51,6 +52,50 @@ namespace DealershipApi.Services.Services
            
                 ctx.Transactions.Add(entity);
                  ctx.SaveChanges();
+            }
+        }
+
+        public void CreateNewVehiclePurchaseTransaction(TransactionCreate model)
+        {
+            var vehicleEntity = new Vehicle()
+            {
+                Make = model.Vehicle.Make,
+                Model = model.Vehicle.Model,
+                ModelYear = model.Vehicle.ModelYear,
+                Color = model.Vehicle.Color,
+                InvoicePrice = model.Vehicle.SalesPrice,
+                DealershipId = model.Vehicle.DealershipId,
+                VehicleCondition = VehicleCondition.New,
+                Mileage = model.Vehicle.Mileage,
+                InStock = true
+            };
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Vehicles.Add(vehicleEntity);
+                ctx.SaveChanges();
+            }
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var newVehicle =
+                    ctx
+                        .Vehicles
+                        .Single(v => v.Id == vehicleEntity.Id);
+
+
+                var entity = new Transaction()
+                {
+                    TypeOfTransaction = model.TypeOfTransaction,
+                    VehicleId = newVehicle.Id,
+                    SupplierId = model.SupplierId,
+                    DealershipId = newVehicle.DealershipId,
+                    SalesPrice = newVehicle.InvoicePrice,
+                    SalesDate = model.SalesDate
+                };
+
+
+                ctx.Transactions.Add(entity);
+                ctx.SaveChanges();
             }
         }
 

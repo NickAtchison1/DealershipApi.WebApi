@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealershipApi.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
     public class VehicleListItem
     {
         public int Id { get; set; }
+        public VehicleCondition VehicleCondition { get; set; }
         public string VehicleName { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealershipApi.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public string Color { get; set; }
         public decimal SalesPrice { get; set; }
         public int DealershipId { get; set; }
-
-        public string VehicleName { get; set; }
+        public VehicleCondition VehicleCondition { get; set; }
+        public double Mileage { get; set; }
     }
 }
