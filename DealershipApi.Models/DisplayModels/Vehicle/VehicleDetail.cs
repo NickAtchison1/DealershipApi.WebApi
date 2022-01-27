@@ -17,6 +17,6 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public decimal SalesPrice { get; set; }
         public int DealershipId { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
-        public double Mileage { get; set; }
+        public int Mileage { get; set; }
     }
 }

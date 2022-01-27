@@ -19,13 +19,13 @@ namespace DealershipApi.Data.DataModels
         [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(15)]
+        [MaxLength(50)]
         public string Make { get; set; }
         [Required]
-        [MaxLength(15)]
+        [MaxLength(50)]
         public string Model { get; set; }
         [Required]
-        [Range (1950,2050)]
+        [Range (1908,2050)]
         public int ModelYear { get; set; }
         [Required]
         [MaxLength(25)]
@@ -39,7 +39,10 @@ namespace DealershipApi.Data.DataModels
 
         public bool InStock { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
-        public double Mileage { get; set; }
+
+        [Required]
+        [Range(0, int.MaxValue)]
+        public int Mileage { get; set; }
 
         public string VehicleName
         {
