@@ -22,10 +22,10 @@ namespace DealershipApi.Data.DataModels
         [Key]
         public int Id { get; set; }
         public int VehicleId { get; set; }
-        public int CustomerId { get; set; }
-        public int SalesPersonId { get; set; }
+        public int? CustomerId { get; set; }
+        public int? SalesPersonId { get; set; }
         public int DealershipId { get; set; }
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
         public decimal SalesPrice { get; set; }
         public DateTime SalesDate { get; set; }
         public TransactionType TypeOfTransaction { get; set; }
@@ -34,5 +34,6 @@ namespace DealershipApi.Data.DataModels
         public virtual Customer Customer { get; set; }  
         public virtual SalesPerson SalesPerson { get; set; }
         public virtual Dealership Dealership { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }
