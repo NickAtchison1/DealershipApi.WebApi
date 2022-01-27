@@ -105,20 +105,21 @@ namespace DealershipApi.Services.Services
             }
         }
 
-        public IEnumerable<VehicleDetail> SearchVehicles(string car)
+        public List<VehicleSearchDetail> SearchVehicles(string car)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query = ctx.Vehicles
-                    .Select(v => new VehicleDetail
+                    .Select(v => new VehicleSearchDetail
                     {
                         Id = v.Id,
                         VehicleName = v.VehicleName,
                         Color = v.Color,
-                        SalesPrice = v.InvoicePrice
-                    }).Where(v => v.VehicleName.Contains(car.ToLower()));
+                        InvoicePrice = v.InvoicePrice
 
-                return query;
+                    }).Where(v => v.VehicleName.ToLower().Contains(car.ToLower()));
+
+                return query.ToList();
 
             }
         }

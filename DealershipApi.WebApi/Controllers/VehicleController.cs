@@ -33,6 +33,15 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(vehicle);
         }
 
+        [HttpGet]
+        [Route("api/vehicle/search/{word}")]
+        public IHttpActionResult Search(string word)
+        {
+            VehicleService vehicleService = CreateVehicleService();
+            var vehicle = vehicleService.SearchVehicles(word);
+            return Ok(vehicle);
+        }
+
         [HttpPost]
         public IHttpActionResult Post(VehicleCreate vehicle)
         {
