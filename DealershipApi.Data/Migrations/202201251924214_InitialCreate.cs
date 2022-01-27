@@ -49,8 +49,8 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         VehicleId = c.Int(nullable: false),
-                        CustomerId = c.Int(nullable: false),
-                        SalesPersonId = c.Int(nullable: false),
+                        CustomerId = c.Int(nullable: true),
+                        SalesPersonId = c.Int(nullable: true),
                         DealershipId = c.Int(nullable: false),
                         SalesPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         SalesDate = c.DateTime(nullable: false),

@@ -20,6 +20,6 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public int DealershipId { get; set; }
         // public virtual Dealership Dealership { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
-        public double Mileage { get; set; }
+        public int Mileage { get; set; }
     }
 }

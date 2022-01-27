@@ -25,6 +25,6 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         [ForeignKey(nameof(Dealership))]
         public int DealershipId { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
-        public double Mileage { get; set; }
+        public int Mileage { get; set; }
     }
 }

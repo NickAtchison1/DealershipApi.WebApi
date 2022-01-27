@@ -22,7 +22,7 @@ namespace DealershipApi.Data.DataModels
         public int? CustomerId { get; set; }
         public int? SalesPersonId { get; set; }
         public int DealershipId { get; set; }
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
         public decimal SalesPrice { get; set; }
         public DateTime SalesDate { get; set; }
         public TransactionType TypeOfTransaction { get; set; }

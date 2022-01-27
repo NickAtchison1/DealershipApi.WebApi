@@ -10,9 +10,9 @@ namespace DealershipApi.Data.DataModels
     public class Dealership
     {
         public int Id { get; set; }
-        [MaxLength(25)]
+        [MaxLength(200)]
         public string Name { get; set; }
-        [MaxLength(35)]
+        [MaxLength(50)]
         public string Address { get; set; }
 
         public virtual ICollection<SalesPerson> SalesPersons { get; set;}
