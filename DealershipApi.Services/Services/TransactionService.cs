@@ -3,9 +3,7 @@ using DealershipApi.Models.DisplayModels.Transaction;
 using DealershipApi.Models.DisplayModels.Vehicle;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,6 +58,7 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+               
                 var transaction = new Transaction()
                 {
                     TypeOfTransaction = TransactionType.Transfer,
@@ -88,7 +87,7 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-
+                
                 var transaction = new Transaction()
                 {
                     TypeOfTransaction = TransactionType.Sale,
