@@ -15,5 +15,7 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public string Color { get; set; }
         public decimal SalesPrice { get; set; }
         public int DealershipId { get; set; }
+
+        public string VehicleName { get; set; }
     }
 }

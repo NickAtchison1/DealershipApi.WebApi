@@ -79,6 +79,7 @@
     <Compile Include="DisplayModels\Vehicle\VehicleDetail.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleEdit.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleListItem.cs" />
+    <Compile Include="DisplayModels\Vehicle\VehicleSearchDetail.cs" />
     <Compile Include="DisplayModels\Vehicle\VehicleTransferDisplay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
