@@ -9,7 +9,7 @@ namespace DealershipApi.Models.DisplayModels.Transaction
 {
     public class TransactionListItem
     {
-        public string TypeOfTransaction { get; set; }
+        public TransactionType TypeOfTransaction { get; set; }
         public string VehicleName { get; set; }
         public string SalesPersonName { get; set; }
         public string DealershipName { get; set; }
