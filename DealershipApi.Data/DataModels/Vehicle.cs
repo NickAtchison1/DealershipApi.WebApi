@@ -52,5 +52,6 @@ namespace DealershipApi.Data.DataModels
             }
             set { _vehicleName = value; }
         }
+
     }
 }
