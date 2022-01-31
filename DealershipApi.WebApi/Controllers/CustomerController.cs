@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize (Roles = "Admin")]
+    [Authorize (Roles = "Admin && Manager")]
     public class CustomerController : ApiController
     {
         public IHttpActionResult Get()

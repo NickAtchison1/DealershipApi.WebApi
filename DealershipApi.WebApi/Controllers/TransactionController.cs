@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-   // [Authorize]
+    [Authorize(Roles = "Admin,Sales")]
     public class TransactionController : ApiController
     {
         private TransactionService CreateTransactionService()
@@ -93,6 +93,7 @@ namespace DealershipApi.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [Route("api/Transaction/Transfer")]
         public IHttpActionResult Transfer([FromBody]TransactionPurchaseCreate transactionId)
         {
