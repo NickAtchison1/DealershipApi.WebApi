@@ -41,7 +41,7 @@ namespace DealershipApi.Services.Services
 
             var entity = new Transaction()
             {
-                TypeOfTransaction = model.TypeOfTransaction,
+                TypeOfTransaction = TransactionType.Purchase,
                 VehicleId = newVehicle.Id,
                 SupplierId = model.SupplierId,
                 DealershipId = newVehicle.DealershipId,
@@ -85,7 +85,7 @@ namespace DealershipApi.Services.Services
 
                 var entity = new Transaction()
                 {
-                    TypeOfTransaction = model.TypeOfTransaction,
+                    TypeOfTransaction = TransactionType.Purchase,
                     VehicleId = newVehicle.Id,
                     SupplierId = model.SupplierId,
                     DealershipId = newVehicle.DealershipId,
