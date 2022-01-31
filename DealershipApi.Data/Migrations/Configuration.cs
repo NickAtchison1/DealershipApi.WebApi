@@ -1,6 +1,8 @@
 ﻿namespace DealershipApi.Data.Migrations
 {
     using DealershipApi.Data.DataModels;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Validation;
@@ -19,8 +21,25 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+
+              
+
+            
+
             try
             {
+                var roles = new List<IdentityRole>
+                {
+                    new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "Admin"},
+                    new IdentityRole { Name = "Manager"},
+                   // new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "SalesPerson"},
+                  //  new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "TestRole1"}
+                };
+                roles.ForEach(role => context.Roles.AddOrUpdate(r => r.Name, role));
+                context.SaveChanges();
+
+
+
                 var customers = new List<Customer>
             {
                 new Customer {FirstName = "John", LastName = "Wick", Address = "12234 Fake Street", Email = "jwick@fakeemail.com"},
@@ -40,7 +59,7 @@
             };
 
 
-                customers.ForEach(s => context.Customers.AddOrUpdate(p => p.Id, s));
+                customers.ForEach(s => context.Customers.AddOrUpdate(p => p.Email, s));
                 context.SaveChanges();
                 //  customers.ForEach(c => context.Customers.AddOrUpdate())
 
@@ -50,8 +69,10 @@
                 new Dealership { Name = "Shay's Car Emporium Honda West", Address = "123 West Street"},
                 new Dealership { Name = "Shay's Car Emporium Chevy North" , Address = "123 North Street"},
                 new Dealership { Name = "Shay's Car Emporium Crysler Jeep Dodge South" , Address = "123 South Street"},
+                
+
             };
-                dealerships.ForEach(s => context.Dealerships.AddOrUpdate(p => p.Id, s));
+                dealerships.ForEach(s => context.Dealerships.AddOrUpdate(p => p.Name, s));
                 context.SaveChanges();
 
                 var suppliers = new List<Supplier>
@@ -66,7 +87,7 @@
                 new Supplier { Name ="Bob Sacamano", SupplierType= SupplierType.Individual, Email = "bsacamano@fakeemail.com"},
                 new Supplier { Name ="John Snow", SupplierType= SupplierType.Individual, Email = "jsnow@fakeemail.com"},
             };
-                suppliers.ForEach(s => context.Suppliers.AddOrUpdate(p => p.Id, s));
+                suppliers.ForEach(s => context.Suppliers.AddOrUpdate(p => p.Email, s));
                 context.SaveChanges();
 
                 var salesPeople = new List<SalesPerson>
@@ -81,7 +102,7 @@
                 new SalesPerson {FirstName = "Reggie", LastName="Miller", Email = "rmiller@ShaysFakeEmail.com", DealerShipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id },
             };
 
-                salesPeople.ForEach(s => context.SalesPeople.AddOrUpdate(p => p.Id, s));
+                salesPeople.ForEach(s => context.SalesPeople.AddOrUpdate(p => p.Email, s));
                 context.SaveChanges();
 
                 var vehicles = new List<Vehicle>
@@ -200,16 +221,26 @@
                 new Vehicle { Make ="Ram", Model="1500", ModelYear=2022, Color="White", InvoicePrice=37000, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id, InStock = true , VehicleCondition=VehicleCondition.New, Mileage=0},
                 new Vehicle { Make ="Ram", Model="2500", ModelYear=2022, Color="Black", InvoicePrice=49000, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id, InStock = true , VehicleCondition=VehicleCondition.New, Mileage=0},
             };
-                vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => p.Id, s));
-                vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => p.VehicleName, s));
+
+                vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => new {p.VehicleName, p.DealershipId, p.Mileage, p.VehicleCondition}, s));
                 context.SaveChanges();
 
 
 
             }
-            catch (System.InvalidOperationException dbEx)
+            catch (DbEntityValidationException e)
             {
-                System.Console.WriteLine(dbEx.Message.ToString());
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
             }
         }
     }
