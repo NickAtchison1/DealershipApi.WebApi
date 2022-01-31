@@ -1,6 +1,7 @@
 ﻿namespace DealershipApi.Data.Migrations
 {
     using DealershipApi.Data.DataModels;
+    using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
@@ -22,24 +23,15 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-              
 
-            
+            InitializeIdentityForEF(context);
+            base.Seed(context);
+
+
+
 
             try
             {
-                var roles = new List<IdentityRole>
-                {
-                    new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "Admin"},
-                    new IdentityRole { Name = "Manager"},
-                   // new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "SalesPerson"},
-                  //  new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "TestRole1"}
-                };
-                roles.ForEach(role => context.Roles.AddOrUpdate(r => r.Name, role));
-                context.SaveChanges();
-
-
-
                 var customers = new List<Customer>
             {
                 new Customer {FirstName = "John", LastName = "Wick", Address = "12234 Fake Street", Email = "jwick@fakeemail.com"},
@@ -69,7 +61,7 @@
                 new Dealership { Name = "Shay's Car Emporium Honda West", Address = "123 West Street"},
                 new Dealership { Name = "Shay's Car Emporium Chevy North" , Address = "123 North Street"},
                 new Dealership { Name = "Shay's Car Emporium Crysler Jeep Dodge South" , Address = "123 South Street"},
-                
+
 
             };
                 dealerships.ForEach(s => context.Dealerships.AddOrUpdate(p => p.Name, s));
@@ -222,7 +214,7 @@
                 new Vehicle { Make ="Ram", Model="2500", ModelYear=2022, Color="Black", InvoicePrice=49000, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id, InStock = true , VehicleCondition=VehicleCondition.New, Mileage=0},
             };
 
-                vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => new {p.VehicleName, p.DealershipId, p.Mileage, p.VehicleCondition}, s));
+                vehicles.ForEach(s => context.Vehicles.AddOrUpdate(p => new { p.VehicleName, p.DealershipId, p.Mileage, p.VehicleCondition }, s));
                 context.SaveChanges();
 
 
@@ -243,7 +235,116 @@
                 throw;
             }
         }
-    }
 
+        public static void InitializeIdentityForEF(ApplicationDbContext db)
+        {
+
+            if (!db.Users.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(db);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var userStore = new UserStore<ApplicationUser>(db);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                // Add missing roles
+                var role = roleManager.FindByName("Admin");
+                if (role == null)
+                {
+                    role = new IdentityRole("Admin");
+                    roleManager.Create(role);
+                }
+
+                var role2 = roleManager.FindByName("Sales");
+                if (role2 == null)
+                {
+                    role2 = new IdentityRole("Sales");
+                    roleManager.Create(role2);
+                }
+
+                // Create test users
+                var landon = userManager.FindByName("Landon");
+                if (landon == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Landon",
+                        FirstName = "Landon",
+                        LastName = "Shay",
+                        Email = "test@test.net",
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var lou = userManager.FindByName("Lou");
+                if (lou == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Lou",
+                        FirstName = "Louis",
+                        LastName = "Milrod",
+                        Email = "test1@test.net",
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var andrew = userManager.FindByName("Andrew");
+                if (andrew == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Andrew",
+                        FirstName = "Andrew",
+                        LastName = "Sitter",
+                        Email = "test3@test.net",
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var nick = userManager.FindByName("Nick");
+                if (nick == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Nick",
+                        FirstName = "Nick",
+                        LastName = "Atchison",
+                        Email = "test4@test.net",
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var sales = userManager.FindByName("Sales");
+                if (sales is null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Sales",
+                        FirstName = "Sales",
+                        LastName = "Guy",
+                        Email = "test5@test.net"
+
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Sales");
+
+                }
+
+
+            }
+
+            
+
+        }
+    }
 }
 
