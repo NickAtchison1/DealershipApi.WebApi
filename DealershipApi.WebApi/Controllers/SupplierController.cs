@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
+    [Authorize(Roles = "Admin,Sales")]
     public class SupplierController : ApiController
     {
         //[Authorize]

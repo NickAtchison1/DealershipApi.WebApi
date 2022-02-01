@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles = "Admin,Sales")]
     public class VehicleController : ApiController
     {
         private VehicleService CreateVehicleService()
