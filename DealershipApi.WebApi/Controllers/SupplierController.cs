@@ -9,78 +9,78 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class SupplierController : ApiController
     {
-        //[Authorize]
-        public class VehicleController : ApiController
+        private SupplierService CreateSupplierService()
         {
-            private SupplierService CreateSupplierService()
+            return new SupplierService();
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            SupplierService supplierService = CreateSupplierService();
+            var supplier = supplierService.GetSuppliers();
+            return Ok(supplier);
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            SupplierService supplierService = CreateSupplierService();
+            var supplier = supplierService.GetSupplierById(id);
+            return Ok(supplier);
+        }
+
+        [Authorize(Roles = "Manager,Admin")]
+        [HttpPost]
+        public IHttpActionResult Post(SupplierCreate supplier)
+        {
+            if (!ModelState.IsValid)
             {
-                return new SupplierService();
+                return BadRequest(ModelState);
             }
 
-            [HttpGet]
-            public IHttpActionResult Get()
+            var service = CreateSupplierService();
+
+            if (!service.CreateSupplier(supplier))
             {
-                SupplierService supplierService = CreateSupplierService();
-                var supplier = supplierService.GetSuppliers();
-                return Ok(supplier);
+                return InternalServerError();
             }
 
-            [HttpGet]
-            public IHttpActionResult Get(int id)
+            return Ok();
+        }
+
+        [Authorize(Roles = "Manager,Admin")]
+        [HttpPut]
+        public IHttpActionResult Put(SupplierEdit supplier)
+        {
+            if (!ModelState.IsValid)
             {
-                SupplierService supplierService = CreateSupplierService();
-                var supplier = supplierService.GetSupplierById(id);
-                return Ok(supplier);
+                return BadRequest(ModelState);
             }
 
-            [HttpPost]
-            public IHttpActionResult Post(SupplierCreate supplier)
+            var service = CreateSupplierService();
+
+            if (!service.UpdateSupplier(supplier))
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var service = CreateSupplierService();
-
-                if (!service.CreateSupplier(supplier))
-                {
-                    return InternalServerError();
-                }
-
-                return Ok();
+                return InternalServerError();
             }
+            return Ok();
+        }
 
-            [HttpPut]
-            public IHttpActionResult Put(SupplierEdit supplier)
+        [Authorize(Roles = "Manager,Admin")]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var service = CreateSupplierService();
+
+            if (!service.RemoveSupplier(id))
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var service = CreateSupplierService();
-
-                if (!service.UpdateSupplier(supplier))
-                {
-                    return InternalServerError();
-                }
-                return Ok();
+                return InternalServerError();
             }
-
-            [HttpDelete]
-            public IHttpActionResult Delete(int id)
-            {
-                var service = CreateSupplierService();
-
-                if (!service.RemoveSupplier(id))
-                {
-                    return InternalServerError();
-                }
-                return Ok();
-            }
+            return Ok();
         }
     }
 }

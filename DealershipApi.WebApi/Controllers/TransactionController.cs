@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize(Roles = "Admin,Sales")]
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class TransactionController : ApiController
     {
         private TransactionService CreateTransactionService()
@@ -27,6 +27,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         [HttpPost]
         [Route("api/Transaction/UsedPurchase")]
         public IHttpActionResult UsedPurchase(TransactionCreate transaction)
@@ -47,6 +48,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok("Purchase Complete");
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         [HttpPost]
         [Route("api/Transaction/NewPurchase")]
         public IHttpActionResult NewPurchase(TransactionCreate transaction)
@@ -67,7 +69,6 @@ namespace DealershipApi.WebApi.Controllers
             return Ok("Purchase Complete");
         }
 
-
         public IHttpActionResult Get(int id)
         {
             TransactionService transactionService = CreateTransactionService();
@@ -75,6 +76,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(transaction);
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         public IHttpActionResult Put(TransactionEdit transaction)
         {
             if (!ModelState.IsValid)
@@ -93,7 +95,7 @@ namespace DealershipApi.WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Manager,Admin")]
         [Route("api/Transaction/Transfer")]
         public IHttpActionResult Transfer([FromBody]TransactionPurchaseCreate transactionId)
         {
@@ -112,7 +114,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok();
         }
         [HttpPost]
-        [Route("api/Transaction/Sale")]
+        [Authorize(Roles = "Manager,Admin")]
         public IHttpActionResult Sale(TransactionPurchaseCreate sale)
         {
             if (!ModelState.IsValid)
@@ -130,6 +132,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok("Good sale!");
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateTransactionService();

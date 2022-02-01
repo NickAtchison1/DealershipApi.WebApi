@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize (Roles = "Admin && Manager")]
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class CustomerController : ApiController
     {
         public IHttpActionResult Get()
@@ -68,6 +68,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateCustomerService();
