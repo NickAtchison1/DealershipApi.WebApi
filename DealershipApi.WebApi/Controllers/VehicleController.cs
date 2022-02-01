@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class VehicleController : ApiController
     {
         private VehicleService CreateVehicleService()
@@ -42,6 +42,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(vehicle);
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         [HttpPost]
         public IHttpActionResult Post(VehicleCreate vehicle)
         {
@@ -60,6 +61,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         [HttpPut]
         public IHttpActionResult Put(VehicleEdit vehicle)
         {
@@ -77,6 +79,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Manager,Admin")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
