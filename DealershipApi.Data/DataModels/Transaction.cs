@@ -30,6 +30,15 @@ namespace DealershipApi.Data.DataModels
         public DateTime SalesDate { get; set; }
         public TransactionType TypeOfTransaction { get; set; }
 
+       
+        public string CreatedBy { get; set; }
+        
+        public DateTime CreatedDate { get; set; }
+      
+        public string UpdatedBy { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
+      
         public virtual Vehicle Vehicle { get; set; }
         public virtual Customer Customer { get; set; }  
         public virtual SalesPerson SalesPerson { get; set; }
