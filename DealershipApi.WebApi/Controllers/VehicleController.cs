@@ -1,5 +1,6 @@
 ﻿using DealershipApi.Models.DisplayModels.Vehicle;
 using DealershipApi.Services.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace DealershipApi.WebApi.Controllers
     {
         private VehicleService CreateVehicleService()
         {
-            return new VehicleService();
+            string userId = RequestContext.Principal.Identity.GetUserId();
+            var vehicleservice = new VehicleService(userId);
+            return vehicleservice;
         }
 
         [HttpGet]

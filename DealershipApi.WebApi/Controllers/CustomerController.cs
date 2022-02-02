@@ -39,9 +39,11 @@ namespace DealershipApi.WebApi.Controllers
 
         private CustomerService CreateCustomerService()
         {
-            
-            var customerService = new CustomerService();
-            return customerService;
+
+            string userId = RequestContext.Principal.Identity.GetUserId();
+
+            var customerservice = new CustomerService(userId);
+            return customerservice;
         }
 
         public IHttpActionResult Get(int id)

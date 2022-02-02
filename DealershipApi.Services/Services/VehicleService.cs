@@ -10,20 +10,39 @@ namespace DealershipApi.Services.Services
 {
     public class VehicleService
     {
+        private readonly string _userId;
+
+        public VehicleService(string userId)
+        {
+            _userId = userId;
+        }
+
         public bool CreateVehicle(VehicleCreate model)
         {
-            var entity =
-                new Vehicle()
-                {
-                    Make = model.Make,
-                    Model = model.Model,
-                    ModelYear = model.ModelYear,
-                    Color = model.Color,
-                    InvoicePrice = model.SalesPrice,
-                    DealershipId = model.DealershipId,
-                };
             using (var ctx = new ApplicationDbContext())
             {
+                var loggedInUser =
+                        ctx
+                            .Users
+                            .Single(u => u.Id == _userId);
+                
+
+                var entity =
+                    new Vehicle()
+                    {
+                        Make = model.Make,
+                        Model = model.Model,
+                        ModelYear = model.ModelYear,
+                        Color = model.Color,
+                        InvoicePrice = model.SalesPrice,
+                        DealershipId = model.DealershipId,
+                        CreatedBy = loggedInUser.Id,
+                        CreatedDate = model.CreatedDate,
+                        Mileage = model.Mileage,
+                        VehicleCondition = model.VehicleCondition,
+                        InStock = true,
+                    };
+
                 ctx.Vehicles.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
