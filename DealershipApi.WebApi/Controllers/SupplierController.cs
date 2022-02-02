@@ -1,5 +1,6 @@
 ﻿using DealershipApi.Models.DisplayModels.Supplier;
 using DealershipApi.Services.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,10 @@ namespace DealershipApi.WebApi.Controllers
     {
         private SupplierService CreateSupplierService()
         {
-            return new SupplierService();
+            string userId = RequestContext.Principal.Identity.GetUserId();
+
+            var supplierservice = new SupplierService(userId);
+            return supplierservice;
         }
 
         [HttpGet]

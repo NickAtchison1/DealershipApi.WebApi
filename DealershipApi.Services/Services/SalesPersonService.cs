@@ -11,9 +11,10 @@ namespace DealershipApi.Services.Services
 {
     public class SalesPersonService
     {
-        public SalesPersonService()
-        {
-
+        private readonly string _userId;
+        public SalesPersonService(string userId)
+        {            
+            _userId = userId;
         }
 
         public bool CreateSalesPerson (SalesPersonCreate model)
