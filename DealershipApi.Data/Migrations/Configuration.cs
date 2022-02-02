@@ -239,17 +239,17 @@
         public static void InitializeIdentityForEF(ApplicationDbContext db)
         {
 
-
-            // {
+            if (!db.Users.Any())
+            {
             var roleStore = new RoleStore<IdentityRole>(db);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
             var userStore = new UserStore<ApplicationUser>(db);
             var userManager = new UserManager<ApplicationUser>(userStore);
 
             // Add missing roles
-            var userList = userStore.Users.Where(u => u.UserName == db.Users.FirstOrDefault().UserName).ToList();
-            if (userList.Any())
-            {
+            //var userList = userStore.Users.Where(u => u.UserName == db.Users.FirstOrDefault().UserName).ToList();
+            //if (userList.Any())
+            //{
                 var role = roleManager.FindByName("Admin");
                 if (role == null)
                 {
