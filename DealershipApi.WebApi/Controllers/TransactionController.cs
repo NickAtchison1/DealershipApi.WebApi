@@ -1,6 +1,7 @@
 ﻿using DealershipApi.Models.DisplayModels.Transaction;
 using DealershipApi.Models.DisplayModels.Vehicle;
 using DealershipApi.Services.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,14 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize(Roles = "Sales,Manager,Admin")]
+  //  [Authorize(Roles = "Sales,Manager,Admin")]
     public class TransactionController : ApiController
     {
         private TransactionService CreateTransactionService()
         {
+            string userId = RequestContext.Principal.Identity.GetUserId();
 
-            var transactionService = new TransactionService();
+            var transactionService = new TransactionService(userId);
             return transactionService;
         }
 
@@ -29,8 +31,8 @@ namespace DealershipApi.WebApi.Controllers
 
         [Authorize(Roles = "Manager,Admin")]
         [HttpPost]
-        [Route("api/Transaction/UsedPurchase")]
-        public IHttpActionResult UsedPurchase(TransactionCreate transaction)
+        [Route("api/Transaction/UsedPurchase/{vehicleId:int}")]
+        public IHttpActionResult UsedPurchase(TransactionCreate transaction, int vehicleId)
         {
             if (!ModelState.IsValid)
             {
@@ -38,7 +40,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             var service = CreateTransactionService();
-            service.CreateUsedVehiclePurchaseTransaction(transaction);
+            service.CreateUsedVehiclePurchaseTransaction(transaction, vehicleId);
 
             //if (!service.CreatePurchaseTransaction(transaction))
             //{
@@ -48,26 +50,26 @@ namespace DealershipApi.WebApi.Controllers
             return Ok("Purchase Complete");
         }
 
-        [Authorize(Roles = "Manager,Admin")]
-        [HttpPost]
-        [Route("api/Transaction/NewPurchase")]
-        public IHttpActionResult NewPurchase(TransactionCreate transaction)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[Authorize(Roles = "Manager,Admin")]
+        //[HttpPost]
+        //[Route("api/Transaction/NewPurchase")]
+        //public IHttpActionResult NewPurchase(TransactionCreate transaction)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var service = CreateTransactionService();
-            service.CreateNewVehiclePurchaseTransaction(transaction);
+        //    var service = CreateTransactionService();
+        //    service.CreateNewVehiclePurchaseTransaction(transaction);
 
-            //if (!service.CreatePurchaseTransaction(transaction))
-            //{
-            //    return InternalServerError();
-            //}
+        //    //if (!service.CreatePurchaseTransaction(transaction))
+        //    //{
+        //    //    return InternalServerError();
+        //    //}
 
-            return Ok("Purchase Complete");
-        }
+        //    return Ok("Purchase Complete");
+        //}
 
         public IHttpActionResult Get(int id)
         {

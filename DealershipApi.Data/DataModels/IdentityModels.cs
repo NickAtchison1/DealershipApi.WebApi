@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
@@ -16,10 +17,11 @@ namespace DealershipApi.Data.DataModels
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-      
-       /*[ForeignKey(nameof(Dealership))]
-       public int DealershipId { get; set; }
-       public virtual Dealership Dealership { get; set; }*/
+
+        [ForeignKey(nameof(Dealership))]
+        public int DealershipId { get; set; }
+        public virtual Dealership Dealership { get; set; }
+       
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

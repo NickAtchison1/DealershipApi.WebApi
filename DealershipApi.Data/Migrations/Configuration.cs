@@ -238,8 +238,9 @@
 
         public static void InitializeIdentityForEF(ApplicationDbContext db)
         {
+          //  throw new NotImplementedException();
 
-            if (!db.Users.Any())
+            if(!db.Users.Any())
             {
             var roleStore = new RoleStore<IdentityRole>(db);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -265,7 +266,7 @@
                 }
 
                 var role3 = roleManager.FindByName("Manager");
-                if(role3 == null)
+                if (role3 == null)
                 {
                     role3 = new IdentityRole("Manager");
                     roleManager.Create(role3);
@@ -281,6 +282,7 @@
                         FirstName = "Landon",
                         LastName = "Shay",
                         Email = "test@test.net",
+                        DealershipId = 4
                     };
                     userManager.Create(newUser, "Password1*");
                     userManager.SetLockoutEnabled(newUser.Id, false);
@@ -296,6 +298,7 @@
                         FirstName = "Louis",
                         LastName = "Milrod",
                         Email = "test1@test.net",
+                        DealershipId = 1
                     };
                     userManager.Create(newUser, "Password1*");
                     userManager.SetLockoutEnabled(newUser.Id, false);
@@ -311,6 +314,7 @@
                         FirstName = "Andrew",
                         LastName = "Sitter",
                         Email = "test3@test.net",
+                        DealershipId = 4
                     };
                     userManager.Create(newUser, "Password1*");
                     userManager.SetLockoutEnabled(newUser.Id, false);
@@ -326,6 +330,7 @@
                         FirstName = "Nick",
                         LastName = "Atchison",
                         Email = "test4@test.net",
+                        DealershipId = 2
                     };
                     userManager.Create(newUser, "Password1*");
                     userManager.SetLockoutEnabled(newUser.Id, false);
@@ -340,7 +345,8 @@
                         UserName = "Sales",
                         FirstName = "Sales",
                         LastName = "Guy",
-                        Email = "test5@test.net"
+                        Email = "test5@test.net",
+                        DealershipId = 1
 
                     };
                     userManager.Create(newUser, "Password1*");
@@ -355,7 +361,8 @@
                         UserName = "Sales1",
                         FirstName = "Sales1",
                         LastName = "Guy1",
-                        Email = "test6@test.net"
+                        Email = "test6@test.net",
+                        DealershipId = 2
 
                     };
                     userManager.Create(newUser1, "Password1*");
@@ -372,7 +379,9 @@
                         UserName = "Boss",
                         FirstName = "Boss",
                         LastName = "Man",
-                        Email = "test7@test.net"
+                        Email = "test7@test.net",
+                        DealershipId = 3
+
 
                     };
                     userManager.Create(boss, "Password1*");
@@ -391,7 +400,7 @@
 
 
 
-    }
+            }
 }
 
 
