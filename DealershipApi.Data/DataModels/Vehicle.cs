@@ -37,8 +37,18 @@ namespace DealershipApi.Data.DataModels
         public int DealershipId { get; set; }
         public virtual Dealership Dealership { get; set; }
 
+     
         public bool InStock { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
+
+        
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string UpdatedBy { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
 
         [Required]
         [Range(0, int.MaxValue)]

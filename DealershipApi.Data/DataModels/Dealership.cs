@@ -18,5 +18,6 @@ namespace DealershipApi.Data.DataModels
         public virtual ICollection<SalesPerson> SalesPersons { get; set;}
         public virtual ICollection<Vehicle> Vehicles { get; set; }
         public virtual ICollection<Transaction> Transactions { get;}
+        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
