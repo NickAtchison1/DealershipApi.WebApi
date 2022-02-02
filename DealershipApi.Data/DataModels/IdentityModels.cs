@@ -74,7 +74,7 @@ namespace DealershipApi.Data.DataModels
 
         }
 
-        public Task aveChangesAsync()
+        public Task SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
