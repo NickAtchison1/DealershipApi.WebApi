@@ -37,7 +37,7 @@ namespace DealershipApi.Services.Services
                         InvoicePrice = model.SalesPrice,
                         DealershipId = model.DealershipId,
                         CreatedBy = loggedInUser.Id,
-                        CreatedDate = model.CreatedDate,
+                        CreatedDate = DateTime.Now,
                         Mileage = model.Mileage,
                         VehicleCondition = model.VehicleCondition,
                         InStock = true,
