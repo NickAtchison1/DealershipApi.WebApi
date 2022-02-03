@@ -138,7 +138,8 @@ namespace DealershipApi.Services.Services
                         Id = v.Id,
                         VehicleName = v.VehicleName,
                         Color = v.Color,
-                        InvoicePrice = v.InvoicePrice
+                        InvoicePrice = v.InvoicePrice,
+                        DealershipId = v.DealershipId
 
                     }).Where(v => v.VehicleName.ToLower().Contains(car.ToLower()));
 
