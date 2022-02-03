@@ -20,8 +20,6 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         [Required]
         public string Color { get; set; }
         [Required]
-        public decimal SalesPrice { get; set; }
-        [Required]
         [ForeignKey(nameof(Dealership))]
         public int DealershipId { get; set; }
         public VehicleCondition VehicleCondition { get; set; }

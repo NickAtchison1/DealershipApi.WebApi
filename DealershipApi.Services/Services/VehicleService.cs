@@ -34,7 +34,6 @@ namespace DealershipApi.Services.Services
                         Model = model.Model,
                         ModelYear = model.ModelYear,
                         Color = model.Color,
-                        InvoicePrice = model.SalesPrice,
                         DealershipId = model.DealershipId,
                         CreatedBy = loggedInUser.Id,
                         CreatedDate = DateTime.Now,
@@ -139,7 +138,8 @@ namespace DealershipApi.Services.Services
                         Id = v.Id,
                         VehicleName = v.VehicleName,
                         Color = v.Color,
-                        InvoicePrice = v.InvoicePrice
+                        InvoicePrice = v.InvoicePrice,
+                        DealershipId = v.DealershipId
 
                     }).Where(v => v.VehicleName.ToLower().Contains(car.ToLower()));
 
