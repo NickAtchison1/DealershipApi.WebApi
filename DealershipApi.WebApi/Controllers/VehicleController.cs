@@ -29,6 +29,7 @@ namespace DealershipApi.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("api/vehicle/{id}")]
         public IHttpActionResult Get(int id)
         {
             VehicleService vehicleService = CreateVehicleService();
