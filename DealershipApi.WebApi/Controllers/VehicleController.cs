@@ -41,6 +41,7 @@ namespace DealershipApi.WebApi.Controllers
         [Route("api/vehicle/search/{word}")]
         public IHttpActionResult Search(string word)
         {
+           
             VehicleService vehicleService = CreateVehicleService();
             var vehicle = vehicleService.SearchVehicles(word);
             return Ok(vehicle);
