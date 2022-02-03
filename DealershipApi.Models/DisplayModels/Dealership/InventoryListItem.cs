@@ -12,6 +12,5 @@ namespace DealershipApi.Models.DisplayModels.Dealership
         public string VehicleName { get; set; }
         public string DealershipLocation { get; set; }        
         public bool InStock { get; set; }
-
     }
 }

@@ -12,6 +12,5 @@ namespace DealershipApi.Models.DisplayModels.SalesPerson
         public string Email { get; set; }
         public int SalesPersonId { get; set; }
         public int DealerShipId { get; set; }
-
     }
 }
