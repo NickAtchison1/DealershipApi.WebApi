@@ -1,6 +1,7 @@
 ﻿using DealershipApi.Data.DataModels;
 using DealershipApi.Models.DisplayModels.Transaction;
 using DealershipApi.Models.DisplayModels.Vehicle;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,27 +19,19 @@ namespace DealershipApi.Services.Services
         }
         public void CreateUsedVehiclePurchaseTransaction(TransactionCreate model, int vehicleId)
         {
-            //var vehicleEntity = new Vehicle()
-            //{
-            //    Make = model.Vehicle.Make,
-            //    Model = model.Vehicle.Model,
-            //    ModelYear = model.Vehicle.ModelYear,
-            //    Color = model.Vehicle.Color,
-            //    InvoicePrice = model.Vehicle.SalesPrice,
-            //    DealershipId = model.Vehicle.DealershipId,
-            //    VehicleCondition = VehicleCondition.Used,
-            //    Mileage = model.Vehicle.Mileage,
-            //    InStock = true
-            //};
-            
+
 
             using (var ctx = new ApplicationDbContext())
             {
-                var loggedInUser =
-                    ctx
-                        .Users
-                        .Single(u => u.Id == _userId);
-                var vehicleToPurchase = ctx.Vehicles.Single(v => v.Id == vehicleId);
+                var loggedInUser = (from u in ctx.Users
+                                    let query = (from ur in ctx.Set<IdentityUserRole>()
+                                                 where ur.UserId.Equals(u.Id)
+                                                 join r in ctx.Roles on ur.RoleId equals r.Id
+                                                 select r.Name)
+                                    where u.Id == _userId
+                                    select new { u.Id, u.DealershipId, listOfRoles = query.ToList() }).Single();
+
+                var vehicleToPurchase = ctx.Vehicles.Single(v => v.Id == vehicleId && v.VehicleCondition == VehicleCondition.Used);
 
 
                 var entity = new Transaction()
@@ -52,65 +45,66 @@ namespace DealershipApi.Services.Services
                     CreatedBy = loggedInUser.Id,
                     CreatedDate = DateTime.Now,
                     UpdatedBy = loggedInUser.Id,
-                    UpdatedDate = DateTime.Now
-                //    UpdatedUtc = DateTimeOffset.Now,
-            };
 
-           
-                ctx.Transactions.Add(entity);
-                 ctx.SaveChanges();
+                };
+
+                if (loggedInUser.DealershipId == entity.DealershipId || loggedInUser.listOfRoles.Contains("Admin"))
+                {
+                    ctx.Transactions.Add(entity);
+                }
+
+                ctx.SaveChanges();
+
+
             }
         }
 
-        //public void CreateNewVehiclePurchaseTransaction(TransactionCreate model)
-        //{
-        //    var vehicleEntity = new Vehicle()
-        //    {
-        //        Make = model.Vehicle.Make,
-        //        Model = model.Vehicle.Model,
-        //        ModelYear = model.Vehicle.ModelYear,
-        //        Color = model.Vehicle.Color,
-        //        InvoicePrice = model.Vehicle.SalesPrice,
-        //        DealershipId = model.Vehicle.DealershipId,
-        //        VehicleCondition = VehicleCondition.New,
-        //        Mileage = model.Vehicle.Mileage,
-        //        InStock = true
-        //    };
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        ctx.Vehicles.Add(vehicleEntity);
-        //        ctx.SaveChanges();
-        //    }
+        public void CreateNewVehiclePurchaseTransaction(TransactionCreate model, int vehicleId)
+        {
+         
+       
 
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var newVehicle =
-        //            ctx
-        //                .Vehicles
-        //                .Single(v => v.Id == vehicleEntity.Id);
+            using (var ctx = new ApplicationDbContext())
+            {
+                var loggedInUser = (from u in ctx.Users
+                                    let query = (from ur in ctx.Set<IdentityUserRole>()
+                                                 where ur.UserId.Equals(u.Id)
+                                                 join r in ctx.Roles on ur.RoleId equals r.Id
+                                                 select r.Name)
+                                    where u.Id == _userId
+                                    select new { u.Id, u.DealershipId, listOfRoles = query.ToList() }).Single();
+
+                var vehicleToPurchase = ctx.Vehicles.Single(v => v.Id == vehicleId && v.VehicleCondition == VehicleCondition.New);
+                
 
 
-        //        var entity = new Transaction()
-        //        {
-        //            TypeOfTransaction = TransactionType.Purchase,
-        //            VehicleId = newVehicle.Id,
-        //            SupplierId = model.SupplierId,
-        //            DealershipId = newVehicle.DealershipId,
-        //            SalesPrice = newVehicle.InvoicePrice,
-        //            SalesDate = model.SalesDate
-        //        };
+                var entity = new Transaction()
+                {
+                    TypeOfTransaction = TransactionType.Purchase,
+                    VehicleId = vehicleToPurchase.Id,
+                    SupplierId = model.SupplierId,
+                    DealershipId = vehicleToPurchase.DealershipId,
+                    SalesPrice = vehicleToPurchase.InvoicePrice,
+                    SalesDate = DateTime.Now,
+                    CreatedBy = loggedInUser.Id,
+                    CreatedDate = DateTime.Now,
+                    UpdatedBy = loggedInUser.Id,
+                };
 
-
-        //        ctx.Transactions.Add(entity);
-        //        ctx.SaveChanges();
-        //    }
-        //}
+                if (loggedInUser.DealershipId == entity.DealershipId || loggedInUser.listOfRoles.Contains("Admin"))
+                {
+                    ctx.Transactions.Add(entity);
+                }
+                   
+                ctx.SaveChanges();
+            }
+        }
 
         public bool CreateTransferTransaction(TransactionPurchaseCreate transfer)
         {
             using (var ctx = new ApplicationDbContext())
             {
-               
+
                 var transaction = new Transaction()
                 {
                     TypeOfTransaction = TransactionType.Transfer,
@@ -139,7 +133,7 @@ namespace DealershipApi.Services.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                
+
                 var transaction = new Transaction()
                 {
                     TypeOfTransaction = TransactionType.Sale,

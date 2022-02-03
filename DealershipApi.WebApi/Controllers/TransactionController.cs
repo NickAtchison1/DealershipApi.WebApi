@@ -40,12 +40,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             var service = CreateTransactionService();
-            service.CreateUsedVehiclePurchaseTransaction(transaction, vehicleId);
-
-            //if (!service.CreatePurchaseTransaction(transaction))
-            //{
-            //    return InternalServerError();
-            //}
+            service.CreateUsedVehiclePurchaseTransaction(transaction, vehicleId);         
 
             return Ok("Purchase Complete");
         }

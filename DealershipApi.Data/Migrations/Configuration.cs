@@ -256,6 +256,26 @@
                 }
 
 
+                var manager1 = userManager.FindByName("Terry");
+                if (manager is null)
+                {
+                    var boss = new ApplicationUser()
+                    {
+                        UserName = "Terry",
+                        FirstName = "Terry",
+                        LastName = "Brown",
+                        Email = "TBRown@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
+
+
+                    };
+                    userManager.Create(boss, "Password1*");
+                    userManager.SetLockoutEnabled(boss.Id, false);
+                    userManager.AddToRole(boss.Id, "Manager");
+
+                }
+
+
 
 
             }
