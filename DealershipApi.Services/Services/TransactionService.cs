@@ -39,7 +39,7 @@ namespace DealershipApi.Services.Services
                     TypeOfTransaction = TransactionType.Purchase,
                     VehicleId = vehicleToPurchase.Id,
                     SupplierId = model.SupplierId,
-                    DealershipId = vehicleToPurchase.DealershipId,
+                    DealershipId = loggedInUser.listOfRoles.Contains("Admin") ? model.DealershipId : loggedInUser.DealershipId,
                     SalesPrice = vehicleToPurchase.InvoicePrice,
                     SalesDate = DateTime.Now,
                     CreatedBy = loggedInUser.Id,
@@ -83,7 +83,7 @@ namespace DealershipApi.Services.Services
                     TypeOfTransaction = TransactionType.Purchase,
                     VehicleId = vehicleToPurchase.Id,
                     SupplierId = model.SupplierId,
-                    DealershipId = vehicleToPurchase.DealershipId,
+                    DealershipId = loggedInUser.listOfRoles.Contains("Admin") ? model.DealershipId : loggedInUser.DealershipId,
                     SalesPrice = vehicleToPurchase.InvoicePrice,
                     SalesDate = DateTime.Now,
                     CreatedBy = loggedInUser.Id,
@@ -99,11 +99,18 @@ namespace DealershipApi.Services.Services
                 ctx.SaveChanges();
             }
         }
-
+        
         public bool CreateTransferTransaction(TransactionPurchaseCreate transfer)
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var loggedInUser = (from u in ctx.Users
+                                    let query = (from ur in ctx.Set<IdentityUserRole>()
+                                                 where ur.UserId.Equals(u.Id)
+                                                 join r in ctx.Roles on ur.RoleId equals r.Id
+                                                 select r.Name)
+                                    where u.Id == _userId
+                                    select new { u.Id, u.DealershipId, listOfRoles = query.ToList() }).Single();
 
                 var transaction = new Transaction()
                 {

@@ -39,7 +39,7 @@ namespace DealershipApi.Services.Services
                         Model = model.Model,
                         ModelYear = model.ModelYear,
                         Color = model.Color,
-                        DealershipId = model.DealershipId,
+                        DealershipId = loggedInUser.listOfRoles.Contains("Admin") ? model.DealershipId : loggedInUser.DealershipId,
                         CreatedBy = loggedInUser.Id,
                         CreatedDate = DateTime.Now,
                         Mileage = model.Mileage,

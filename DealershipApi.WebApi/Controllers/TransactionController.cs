@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-  //  [Authorize(Roles = "Sales,Manager,Admin")]
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class TransactionController : ApiController
     {
         private TransactionService CreateTransactionService()
@@ -40,31 +40,28 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             var service = CreateTransactionService();
-            service.CreateUsedVehiclePurchaseTransaction(transaction, vehicleId);         
+            service.CreateUsedVehiclePurchaseTransaction(transaction, vehicleId);
 
             return Ok("Purchase Complete");
         }
 
-        //[Authorize(Roles = "Manager,Admin")]
-        //[HttpPost]
-        //[Route("api/Transaction/NewPurchase")]
-        //public IHttpActionResult NewPurchase(TransactionCreate transaction)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [Authorize(Roles = "Manager,Admin")]
+        [HttpPost]
+        [Route("api/Transaction/NewPurchase/{vehicleId:int}")]
+        public IHttpActionResult NewPurchase(TransactionCreate transaction, int vehicleId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var service = CreateTransactionService();
-        //    service.CreateNewVehiclePurchaseTransaction(transaction);
+            var service = CreateTransactionService();
+            service.CreateNewVehiclePurchaseTransaction(transaction, vehicleId);
 
-        //    //if (!service.CreatePurchaseTransaction(transaction))
-        //    //{
-        //    //    return InternalServerError();
-        //    //}
 
-        //    return Ok("Purchase Complete");
-        //}
+
+            return Ok("Purchase Complete");
+        }
 
         public IHttpActionResult Get(int id)
         {
@@ -94,7 +91,7 @@ namespace DealershipApi.WebApi.Controllers
         [HttpPost]
         [Authorize(Roles = "Manager,Admin")]
         [Route("api/Transaction/Transfer")]
-        public IHttpActionResult Transfer([FromBody]TransactionPurchaseCreate transactionId)
+        public IHttpActionResult Transfer([FromBody] TransactionPurchaseCreate transactionId)
         {
             if (!ModelState.IsValid)
             {
@@ -120,7 +117,7 @@ namespace DealershipApi.WebApi.Controllers
             }
 
             var service = CreateTransactionService();
-            
+
             if (!service.CreateSaleTransaction(sale))
             {
                 return InternalServerError();
