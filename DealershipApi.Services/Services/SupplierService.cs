@@ -10,9 +10,10 @@ namespace DealershipApi.Services.Services
 {
     public class SupplierService
     {
-        public SupplierService()
+        private readonly string _userId;
+        public SupplierService(string userId)
         {
-
+            _userId = userId;
         }
 
         public bool CreateSupplier(SupplierCreate model)

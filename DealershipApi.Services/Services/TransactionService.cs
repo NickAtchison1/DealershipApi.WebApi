@@ -11,42 +11,49 @@ namespace DealershipApi.Services.Services
 {
     public class TransactionService
     {
-        public void CreateUsedVehiclePurchaseTransaction(TransactionCreate model)
+        private readonly string _userId;
+        public TransactionService(string userId)
         {
-            var vehicleEntity = new Vehicle()
-            {
-                Make = model.Vehicle.Make,
-                Model = model.Vehicle.Model,
-                ModelYear = model.Vehicle.ModelYear,
-                Color = model.Vehicle.Color,
-                InvoicePrice = model.Vehicle.SalesPrice,
-                DealershipId = model.Vehicle.DealershipId,
-                VehicleCondition = VehicleCondition.Used,
-                Mileage = model.Vehicle.Mileage,
-                InStock = true
-            };
-            using (var ctx = new ApplicationDbContext())
-            {
-                ctx.Vehicles.Add(vehicleEntity);
-                 ctx.SaveChanges();
-            }
-
-            using (var ctx = new ApplicationDbContext())
-            {
-                var newVehicle =
-                    ctx
-                        .Vehicles
-                        .Single(v => v.Id == vehicleEntity.Id);
+            _userId = userId;
+        }
+        public void CreateUsedVehiclePurchaseTransaction(TransactionCreate model, int vehicleId)
+        {
+            //var vehicleEntity = new Vehicle()
+            //{
+            //    Make = model.Vehicle.Make,
+            //    Model = model.Vehicle.Model,
+            //    ModelYear = model.Vehicle.ModelYear,
+            //    Color = model.Vehicle.Color,
+            //    InvoicePrice = model.Vehicle.SalesPrice,
+            //    DealershipId = model.Vehicle.DealershipId,
+            //    VehicleCondition = VehicleCondition.Used,
+            //    Mileage = model.Vehicle.Mileage,
+            //    InStock = true
+            //};
             
 
-            var entity = new Transaction()
+            using (var ctx = new ApplicationDbContext())
             {
-                TypeOfTransaction = TransactionType.Purchase,
-                VehicleId = newVehicle.Id,
-                SupplierId = model.SupplierId,
-                DealershipId = newVehicle.DealershipId,
-                SalesPrice = newVehicle.InvoicePrice,
-                SalesDate = model.SalesDate
+                var loggedInUser =
+                    ctx
+                        .Users
+                        .Single(u => u.Id == _userId);
+                var vehicleToPurchase = ctx.Vehicles.Single(v => v.Id == vehicleId);
+
+
+                var entity = new Transaction()
+                {
+                    TypeOfTransaction = TransactionType.Purchase,
+                    VehicleId = vehicleToPurchase.Id,
+                    SupplierId = model.SupplierId,
+                    DealershipId = vehicleToPurchase.DealershipId,
+                    SalesPrice = vehicleToPurchase.InvoicePrice,
+                    SalesDate = DateTime.Now,
+                    CreatedBy = loggedInUser.Id,
+                    CreatedDate = DateTime.Now,
+                    UpdatedBy = loggedInUser.Id,
+                    UpdatedDate = DateTime.Now
+                //    UpdatedUtc = DateTimeOffset.Now,
             };
 
            
@@ -55,49 +62,49 @@ namespace DealershipApi.Services.Services
             }
         }
 
-        public void CreateNewVehiclePurchaseTransaction(TransactionCreate model)
-        {
-            var vehicleEntity = new Vehicle()
-            {
-                Make = model.Vehicle.Make,
-                Model = model.Vehicle.Model,
-                ModelYear = model.Vehicle.ModelYear,
-                Color = model.Vehicle.Color,
-                InvoicePrice = model.Vehicle.SalesPrice,
-                DealershipId = model.Vehicle.DealershipId,
-                VehicleCondition = VehicleCondition.New,
-                Mileage = model.Vehicle.Mileage,
-                InStock = true
-            };
-            using (var ctx = new ApplicationDbContext())
-            {
-                ctx.Vehicles.Add(vehicleEntity);
-                ctx.SaveChanges();
-            }
+        //public void CreateNewVehiclePurchaseTransaction(TransactionCreate model)
+        //{
+        //    var vehicleEntity = new Vehicle()
+        //    {
+        //        Make = model.Vehicle.Make,
+        //        Model = model.Vehicle.Model,
+        //        ModelYear = model.Vehicle.ModelYear,
+        //        Color = model.Vehicle.Color,
+        //        InvoicePrice = model.Vehicle.SalesPrice,
+        //        DealershipId = model.Vehicle.DealershipId,
+        //        VehicleCondition = VehicleCondition.New,
+        //        Mileage = model.Vehicle.Mileage,
+        //        InStock = true
+        //    };
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        ctx.Vehicles.Add(vehicleEntity);
+        //        ctx.SaveChanges();
+        //    }
 
-            using (var ctx = new ApplicationDbContext())
-            {
-                var newVehicle =
-                    ctx
-                        .Vehicles
-                        .Single(v => v.Id == vehicleEntity.Id);
-
-
-                var entity = new Transaction()
-                {
-                    TypeOfTransaction = TransactionType.Purchase,
-                    VehicleId = newVehicle.Id,
-                    SupplierId = model.SupplierId,
-                    DealershipId = newVehicle.DealershipId,
-                    SalesPrice = newVehicle.InvoicePrice,
-                    SalesDate = model.SalesDate
-                };
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var newVehicle =
+        //            ctx
+        //                .Vehicles
+        //                .Single(v => v.Id == vehicleEntity.Id);
 
 
-                ctx.Transactions.Add(entity);
-                ctx.SaveChanges();
-            }
-        }
+        //        var entity = new Transaction()
+        //        {
+        //            TypeOfTransaction = TransactionType.Purchase,
+        //            VehicleId = newVehicle.Id,
+        //            SupplierId = model.SupplierId,
+        //            DealershipId = newVehicle.DealershipId,
+        //            SalesPrice = newVehicle.InvoicePrice,
+        //            SalesDate = model.SalesDate
+        //        };
+
+
+        //        ctx.Transactions.Add(entity);
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
         public bool CreateTransferTransaction(TransactionPurchaseCreate transfer)
         {
