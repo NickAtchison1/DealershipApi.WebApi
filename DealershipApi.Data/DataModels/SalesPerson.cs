@@ -13,19 +13,24 @@ namespace DealershipApi.Data.DataModels
         private string _fullName; 
         [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string Email { get; set; }
 
+
         [ForeignKey (nameof(Dealership))]
         public int DealerShipId { get; set; }
         public virtual Dealership Dealership { get; set; }
+
         public string FullName
         {
             get

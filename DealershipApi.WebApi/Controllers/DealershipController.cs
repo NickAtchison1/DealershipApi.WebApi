@@ -68,6 +68,5 @@ namespace DealershipApi.WebApi.Controllers
             if(!dealershipService.DeleteDealership(id)) return InternalServerError();
             return Ok();
         }
-
     }
 }

@@ -10,7 +10,6 @@ namespace DealershipApi.Models.DisplayModels.Dealership
     {
         public int DealershipId { get; set; }
         public string DealershipName { get; set; }
-
         public string Address { get; set; }
     }
 }
