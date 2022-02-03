@@ -30,7 +30,6 @@
 
 
 
-
             var customers = new List<Customer>
             {
                 new Customer {FirstName = "John", LastName = "Wick", Address = "12234 Fake Street", Email = "jwick@fakeemail.com"},
@@ -95,7 +94,171 @@
 
             salesPeople.ForEach(s => context.SalesPeople.AddOrUpdate(p => p.Email, s));
             context.SaveChanges();
+        
 
+
+
+            // }
+
+            //public static void InitializeIdentityForEF(ApplicationDbContext context)
+            //{
+            //  throw new NotImplementedException();
+
+            if (!context.Users.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                //var dealerships = context.Dealerships.ToList();
+
+                // Add missing roles
+                //var userList = userStore.Users.Where(u => u.UserName == context.Users.FirstOrDefault().UserName).ToList();
+                //if (userList.Any())
+                //{
+                var role = roleManager.FindByName("Admin");
+                if (role == null)
+                {
+                    role = new IdentityRole("Admin");
+                    roleManager.Create(role);
+                }
+
+                var role2 = roleManager.FindByName("Sales");
+                if (role2 == null)
+                {
+                    role2 = new IdentityRole("Sales");
+                    roleManager.Create(role2);
+                }
+
+                var role3 = roleManager.FindByName("Manager");
+                if (role3 == null)
+                {
+                    role3 = new IdentityRole("Manager");
+                    roleManager.Create(role3);
+                }
+
+                // Create test users
+                var landon = userManager.FindByName("Landon");
+                if (landon == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Landon",
+                        FirstName = "Landon",
+                        LastName = "Shay",
+                        Email = "test@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var lou = userManager.FindByName("Lou");
+                if (lou == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Lou",
+                        FirstName = "Louis",
+                        LastName = "Milrod",
+                        Email = "test1@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Kia Mazda East").Id
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var andrew = userManager.FindByName("Andrew");
+                if (andrew == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Andrew",
+                        FirstName = "Andrew",
+                        LastName = "Sitter",
+                        Email = "test3@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var nick = userManager.FindByName("Nick");
+                if (nick == null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Nick",
+                        FirstName = "Nick",
+                        LastName = "Atchison",
+                        Email = "test4@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Honda West").Id
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+
+                var sales = userManager.FindByName("Sales");
+                if (sales is null)
+                {
+                    var newUser = new ApplicationUser()
+                    {
+                        UserName = "Sales",
+                        FirstName = "Sales",
+                        LastName = "Guy",
+                        Email = "test5@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Kia Mazda East").Id
+
+                    };
+                    userManager.Create(newUser, "Password1*");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Sales");
+                }
+                var sales1 = userManager.FindByName("Sales1");
+                if (sales1 is null)
+                {
+                    var newUser1 = new ApplicationUser()
+                    {
+                        UserName = "Sales1",
+                        FirstName = "Sales1",
+                        LastName = "Guy1",
+                        Email = "test6@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Honda West").Id
+
+                    };
+                    userManager.Create(newUser1, "Password1*");
+                    userManager.SetLockoutEnabled(newUser1.Id, false);
+                    userManager.AddToRole(newUser1.Id, "Sales");
+
+                }
+
+                var manager = userManager.FindByName("Boss");
+                if (manager is null)
+                {
+                    var boss = new ApplicationUser()
+                    {
+                        UserName = "Boss",
+                        FirstName = "Boss",
+                        LastName = "Man",
+                        Email = "test7@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
+
+
+                    };
+                    userManager.Create(boss, "Password1*");
+                    userManager.SetLockoutEnabled(boss.Id, false);
+                    userManager.AddToRole(boss.Id, "Sales");
+
+                }
+
+
+
+
+            }
             var vehicles = new List<Vehicle>
             {
                 new Vehicle { Make ="Chevrolet", Model="Malibu", ModelYear=2005, Color="Black", InvoicePrice=2500, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Kia Mazda East").Id, InStock = true, VehicleCondition=VehicleCondition.Used, Mileage=115000},
@@ -212,15 +375,29 @@
                 new Vehicle { Make ="Ram", Model="1500", ModelYear=2022, Color="White", InvoicePrice=37000, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id, InStock = true , VehicleCondition=VehicleCondition.New, Mileage=0},
                 new Vehicle { Make ="Ram", Model="2500", ModelYear=2022, Color="Black", InvoicePrice=49000, DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id, InStock = true , VehicleCondition=VehicleCondition.New, Mileage=0},
             };
+
+
+            var rand = new Random();
+            int range = 365;
+            // var roles = context.Roles.Single(r => UserLoginInfo.)
+            // DateTime randomDate = DateTime.Today.AddDays(-rand.Next(range));
             foreach (var vehicle in vehicles)
             {
-                Random r = new Random();
-                DateTime start = new DateTime(2021, 01, 01);
-                int range = (DateTime.Today - start).Days;
-                vehicle.CreatedDate = start.AddDays(r.Next(range));
+                vehicle.CreatedDate = DateTime.Today.AddDays(-rand.Next(range));
                 vehicle.UpdatedDate = vehicle.CreatedDate;
-               // vehicle.CreatedBy = context.Users.Single()
-                //vehicle.UpdatedBy = context.Users.Single(u => u.DealershipId == vehicle.DealershipId).Id;
+                vehicle.CreatedBy = (from u in context.Users
+                                         //from ur in u.Roles
+                                         //join r in context.Roles on ur.RoleId equals r.Id
+                                         //where r.Name == "Admin"
+                                     where u.DealershipId == vehicle.DealershipId
+                                     where new[] { "Nick", "Landon", "Louis", "Andrew" }.Any(s => s == u.FirstName)
+                                     select u.Id).Single();
+                vehicle.UpdatedBy = vehicle.CreatedBy;
+
+                //  vehicle.CreatedBy = context.Users.Single(u => u.DealershipId.ToString() == vehicle.DealershipId.ToString()).ToString();
+
+
+
 
             }
 
@@ -230,191 +407,29 @@
 
 
 
-       // }
-
-            //public static void InitializeIdentityForEF(ApplicationDbContext context)
-            //{
-            //  throw new NotImplementedException();
-
-            if (!context.Users.Any())
-            {
-                var roleStore = new RoleStore<IdentityRole>(context);
-        var roleManager = new RoleManager<IdentityRole>(roleStore);
-        var userStore = new UserStore<ApplicationUser>(context);
-        var userManager = new UserManager<ApplicationUser>(userStore);
-        //var dealerships = context.Dealerships.ToList();
-
-        // Add missing roles
-        //var userList = userStore.Users.Where(u => u.UserName == context.Users.FirstOrDefault().UserName).ToList();
-        //if (userList.Any())
-        //{
-        var role = roleManager.FindByName("Admin");
-                if (role == null)
-                {
-                    role = new IdentityRole("Admin");
-        roleManager.Create(role);
-                }
-
-    var role2 = roleManager.FindByName("Sales");
-                if (role2 == null)
-                {
-                    role2 = new IdentityRole("Sales");
-    roleManager.Create(role2);
-                }
-
-var role3 = roleManager.FindByName("Manager");
-if (role3 == null)
-{
-    role3 = new IdentityRole("Manager");
-    roleManager.Create(role3);
-}
-
-// Create test users
-var landon = userManager.FindByName("Landon");
-if (landon == null)
-{
-    var newUser = new ApplicationUser()
-    {
-        UserName = "Landon",
-        FirstName = "Landon",
-        LastName = "Shay",
-        Email = "test@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
-    };
-    userManager.Create(newUser, "Password1*");
-    userManager.SetLockoutEnabled(newUser.Id, false);
-    userManager.AddToRole(newUser.Id, "Admin");
-}
-
-var lou = userManager.FindByName("Lou");
-if (lou == null)
-{
-    var newUser = new ApplicationUser()
-    {
-        UserName = "Lou",
-        FirstName = "Louis",
-        LastName = "Milrod",
-        Email = "test1@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Kia Mazda East").Id
-    };
-    userManager.Create(newUser, "Password1*");
-    userManager.SetLockoutEnabled(newUser.Id, false);
-    userManager.AddToRole(newUser.Id, "Admin");
-}
-
-var andrew = userManager.FindByName("Andrew");
-if (andrew == null)
-{
-    var newUser = new ApplicationUser()
-    {
-        UserName = "Andrew",
-        FirstName = "Andrew",
-        LastName = "Sitter",
-        Email = "test3@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Crysler Jeep Dodge South").Id
-    };
-    userManager.Create(newUser, "Password1*");
-    userManager.SetLockoutEnabled(newUser.Id, false);
-    userManager.AddToRole(newUser.Id, "Admin");
-}
-
-var nick = userManager.FindByName("Nick");
-if (nick == null)
-{
-    var newUser = new ApplicationUser()
-    {
-        UserName = "Nick",
-        FirstName = "Nick",
-        LastName = "Atchison",
-        Email = "test4@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Honda West").Id
-    };
-    userManager.Create(newUser, "Password1*");
-    userManager.SetLockoutEnabled(newUser.Id, false);
-    userManager.AddToRole(newUser.Id, "Admin");
-}
-
-var sales = userManager.FindByName("Sales");
-if (sales is null)
-{
-    var newUser = new ApplicationUser()
-    {
-        UserName = "Sales",
-        FirstName = "Sales",
-        LastName = "Guy",
-        Email = "test5@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Kia Mazda East").Id
-
-    };
-    userManager.Create(newUser, "Password1*");
-    userManager.SetLockoutEnabled(newUser.Id, false);
-    userManager.AddToRole(newUser.Id, "Sales");
-}
-var sales1 = userManager.FindByName("Sales1");
-if (sales1 is null)
-{
-    var newUser1 = new ApplicationUser()
-    {
-        UserName = "Sales1",
-        FirstName = "Sales1",
-        LastName = "Guy1",
-        Email = "test6@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Honda West").Id
-
-    };
-    userManager.Create(newUser1, "Password1*");
-    userManager.SetLockoutEnabled(newUser1.Id, false);
-    userManager.AddToRole(newUser1.Id, "Sales");
-
-}
-
-var manager = userManager.FindByName("Boss");
-if (manager is null)
-{
-    var boss = new ApplicationUser()
-    {
-        UserName = "Boss",
-        FirstName = "Boss",
-        LastName = "Man",
-        Email = "test7@test.net",
-        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
-
-
-    };
-    userManager.Create(boss, "Password1*");
-    userManager.SetLockoutEnabled(boss.Id, false);
-    userManager.AddToRole(boss.Id, "Sales");
-
-}
-
-
-
-
-            }
-
-        }
-
-
-            
-//            catch (DbEntityValidationException e)
-//            {
-//                foreach (var eve in e.EntityValidationErrors)
-//                {
-//                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-//                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-//                    foreach (var ve in eve.ValidationErrors)
-//                    {
-//                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-//                            ve.PropertyName, ve.ErrorMessage);
-//                    }
-//}
-//throw;
-            }
         }
 
 
 
-    
+        //            catch (DbEntityValidationException e)
+        //            {
+        //                foreach (var eve in e.EntityValidationErrors)
+        //                {
+        //                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+        //                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+        //                    foreach (var ve in eve.ValidationErrors)
+        //                    {
+        //                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+        //                            ve.PropertyName, ve.ErrorMessage);
+        //                    }
+        //}
+        //throw;
+    }
+}
+
+
+
+
 
 
 
