@@ -34,7 +34,6 @@ namespace DealershipApi.Services.Services
                         Model = model.Model,
                         ModelYear = model.ModelYear,
                         Color = model.Color,
-                        InvoicePrice = model.SalesPrice,
                         DealershipId = model.DealershipId,
                         CreatedBy = loggedInUser.Id,
                         CreatedDate = DateTime.Now,
