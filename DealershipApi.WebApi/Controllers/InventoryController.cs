@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize(Roles = "Admin,Sales")]
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class InventoryController : ApiController
     {
         private InventoryListItemService CreateInventoryListItemService()

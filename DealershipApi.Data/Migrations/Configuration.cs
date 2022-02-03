@@ -239,14 +239,17 @@
         public static void InitializeIdentityForEF(ApplicationDbContext db)
         {
 
-            if (!db.Users.Any())
-            {
-                var roleStore = new RoleStore<IdentityRole>(db);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
-                var userStore = new UserStore<ApplicationUser>(db);
-                var userManager = new UserManager<ApplicationUser>(userStore);
 
-                // Add missing roles
+            // {
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+            var userStore = new UserStore<ApplicationUser>(db);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            // Add missing roles
+            var userList = userStore.Users.Where(u => u.UserName == db.Users.FirstOrDefault().UserName).ToList();
+            if (userList.Any())
+            {
                 var role = roleManager.FindByName("Admin");
                 if (role == null)
                 {
@@ -259,6 +262,13 @@
                 {
                     role2 = new IdentityRole("Sales");
                     roleManager.Create(role2);
+                }
+
+                var role3 = roleManager.FindByName("Manager");
+                if(role3 == null)
+                {
+                    role3 = new IdentityRole("Manager");
+                    roleManager.Create(role3);
                 }
 
                 // Create test users
@@ -336,15 +346,53 @@
                     userManager.Create(newUser, "Password1*");
                     userManager.SetLockoutEnabled(newUser.Id, false);
                     userManager.AddToRole(newUser.Id, "Sales");
+                }
+                var sales1 = userManager.FindByName("Sales1");
+                if (sales1 is null)
+                {
+                    var newUser1 = new ApplicationUser()
+                    {
+                        UserName = "Sales1",
+                        FirstName = "Sales1",
+                        LastName = "Guy1",
+                        Email = "test6@test.net"
+
+                    };
+                    userManager.Create(newUser1, "Password1*");
+                    userManager.SetLockoutEnabled(newUser1.Id, false);
+                    userManager.AddToRole(newUser1.Id, "Sales");
+
+                }
+
+                var manager = userManager.FindByName("Boss");
+                if (manager is null)
+                {
+                    var boss = new ApplicationUser()
+                    {
+                        UserName = "Boss",
+                        FirstName = "Boss",
+                        LastName = "Man",
+                        Email = "test7@test.net"
+
+                    };
+                    userManager.Create(boss, "Password1*");
+                    userManager.SetLockoutEnabled(boss.Id, false);
+                    userManager.AddToRole(boss.Id, "Sales");
 
                 }
 
 
+
+
             }
 
-            
 
         }
+
+
+
     }
 }
+
+
 

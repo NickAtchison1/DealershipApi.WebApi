@@ -10,10 +10,9 @@ using System.Web.Http;
 
 namespace DealershipApi.WebApi.Controllers
 {
-    [Authorize(Roles = "Admin,Manager,Sales")]
+    [Authorize(Roles = "Sales,Manager,Admin")]
     public class CustomerController : ApiController
     {
-        [Authorize(Roles = "Manager")]
         public IHttpActionResult Get()
         {
             CustomerService customerService = CreateCustomerService();
@@ -21,7 +20,6 @@ namespace DealershipApi.WebApi.Controllers
             return Ok(customer);
         }
 
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult Post(CustomerCreate customer)
         {
             if (!ModelState.IsValid)
@@ -70,6 +68,7 @@ namespace DealershipApi.WebApi.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         public IHttpActionResult Delete(int id)
         {
             var service = CreateCustomerService();
