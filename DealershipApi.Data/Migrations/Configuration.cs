@@ -236,14 +236,14 @@
 
                 }
 
-                var manager = userManager.FindByName("Boss");
+                var manager = userManager.FindByName("Manager1");
                 if (manager is null)
                 {
                     var boss = new ApplicationUser()
                     {
-                        UserName = "Boss",
-                        FirstName = "Boss",
-                        LastName = "Man",
+                        UserName = "Manager",
+                        FirstName = "Manager",
+                        LastName = "Person",
                         Email = "test7@test.net",
                         DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
 
@@ -251,21 +251,21 @@
                     };
                     userManager.Create(boss, "Password1*");
                     userManager.SetLockoutEnabled(boss.Id, false);
-                    userManager.AddToRole(boss.Id, "Sales");
+                    userManager.AddToRole(boss.Id, "Manager");
 
                 }
 
 
-                var manager1 = userManager.FindByName("Terry");
+                var manager1 = userManager.FindByName("Manager");
                 if (manager is null)
                 {
                     var boss = new ApplicationUser()
                     {
-                        UserName = "Terry",
-                        FirstName = "Terry",
-                        LastName = "Brown",
-                        Email = "TBRown@test.net",
-                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Chevy North").Id
+                        UserName = "AnotherManager",
+                        FirstName = "AnotherManager",
+                        LastName = "Smith",
+                        Email = "AMSmith@test.net",
+                        DealershipId = dealerships.Single(d => d.Name == "Shay's Car Emporium Honda West").Id
 
 
                     };
