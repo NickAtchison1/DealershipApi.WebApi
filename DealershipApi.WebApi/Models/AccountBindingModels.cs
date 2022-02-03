@@ -30,6 +30,7 @@ namespace DealershipApi.WebApi.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+     
     }
 
     public class RegisterBindingModel
@@ -47,7 +48,11 @@ namespace DealershipApi.WebApi.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }        
+        public string FirstName { get; set; }       
+        public string LastName { get; set; }       
+        public int DealerShipId { get; set; }
+        public string UserName { get; set; }
     }
 
     public class RegisterExternalBindingModel
