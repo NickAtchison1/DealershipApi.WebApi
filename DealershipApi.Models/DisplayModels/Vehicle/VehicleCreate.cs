@@ -26,5 +26,8 @@ namespace DealershipApi.Models.DisplayModels.Vehicle
         public int DealershipId { get; set; }
         public VehicleCondition VehicleCondition { get; set; }
         public int Mileage { get; set; }
+        public DateTime CreatedDate { get; set; }
+
+        
     }
 }

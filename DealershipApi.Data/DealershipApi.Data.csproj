@@ -118,6 +118,14 @@
     <Compile Include="Migrations\202201272049368_UpdateVehicleMileage.designer.cs">
       <DependentUpon>202201272049368_UpdateVehicleMileage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202022008071_addCreatedandUpdatedBy.cs" />
+    <Compile Include="Migrations\202202022008071_addCreatedandUpdatedBy.designer.cs">
+      <DependentUpon>202202022008071_addCreatedandUpdatedBy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.cs" />
+    <Compile Include="Migrations\202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.designer.cs">
+      <DependentUpon>202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,6 +151,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201272049368_UpdateVehicleMileage.resx">
       <DependentUpon>202201272049368_UpdateVehicleMileage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202022008071_addCreatedandUpdatedBy.resx">
+      <DependentUpon>202202022008071_addCreatedandUpdatedBy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.resx">
+      <DependentUpon>202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

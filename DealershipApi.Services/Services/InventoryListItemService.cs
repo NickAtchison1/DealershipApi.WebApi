@@ -10,6 +10,11 @@ namespace DealershipApi.Services.Services
 {
     public class InventoryListItemService
     {
+        private readonly string _userId;
+        public InventoryListItemService(string userId)
+        {
+            _userId = userId;
+        }
         public IEnumerable<InventoryListItem> GetInventoryInStock()
         {
             using (var ctx = new ApplicationDbContext()) 

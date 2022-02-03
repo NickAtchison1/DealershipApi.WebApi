@@ -11,6 +11,12 @@ namespace DealershipApi.Services.Services
 {
     public class CustomerService
     {
+        
+        private readonly string _userId;
+        public CustomerService(string userId)
+        {
+            _userId = userId;
+        }
         public bool CreateCustomer(CustomerCreate customer)
         {
             var entity = new Customer()

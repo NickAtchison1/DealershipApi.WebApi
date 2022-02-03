@@ -32,11 +32,11 @@ namespace DealershipApi.Data.DataModels
 
        
         public string CreatedBy { get; set; }
-        
+        [Column(TypeName = "datetime2")]
         public DateTime CreatedDate { get; set; }
       
         public string UpdatedBy { get; set; }
-
+        [Column(TypeName = "datetime2")]
         public DateTime UpdatedDate { get; set; }
       
         public virtual Vehicle Vehicle { get; set; }
