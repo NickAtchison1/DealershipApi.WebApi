@@ -24,23 +24,4 @@
 Sales|Sales|1|       |
 Sales1|Sales|2|     |
 
-****Newly created users will autmatically be assinged to the `Sales` role.****
-
-### Run the below query in your sql editor of choice to get a list of all users and roles ###
-```
-select 
-a.id
-,a.UserName
-,STRING_AGG(ir.Name, ',') as ListOfRoleNames
-,a.DealershipId
-from ApplicationUser a
-join IdentityUserRole iur 
-on a.Id = iur.UserId
-join IdentityRole ir 
-on iur.RoleId = ir.Id
-GROUP BY 
-a.id
-,a.UserName
-,ir.Name
-,a.DealershipId
-```
+****Newly created users will autmatically be assigned to the `Sales` role.****
