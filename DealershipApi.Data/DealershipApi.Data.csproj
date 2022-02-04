@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -88,13 +91,81 @@
     <Compile Include="DataModels\Dealership.cs" />
     <Compile Include="DataModels\IdentityModels.cs" />
     <Compile Include="DataModels\SalesPerson.cs" />
+    <Compile Include="DataModels\Supplier.cs" />
     <Compile Include="DataModels\Transaction.cs" />
     <Compile Include="DataModels\Vehicle.cs" />
+    <Compile Include="Migrations\202201251924214_InitialCreate.cs" />
+    <Compile Include="Migrations\202201251924214_InitialCreate.designer.cs">
+      <DependentUpon>202201251924214_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.cs" />
+    <Compile Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.designer.cs">
+      <DependentUpon>202201252036456_RemoveDealerFromApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201261905566_InStockBoolAdded.cs" />
+    <Compile Include="Migrations\202201261905566_InStockBoolAdded.designer.cs">
+      <DependentUpon>202201261905566_InStockBoolAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201261949306_AddVehicleName.cs" />
+    <Compile Include="Migrations\202201261949306_AddVehicleName.designer.cs">
+      <DependentUpon>202201261949306_AddVehicleName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201262007346_UpdatedFullName.cs" />
+    <Compile Include="Migrations\202201262007346_UpdatedFullName.designer.cs">
+      <DependentUpon>202201262007346_UpdatedFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201272049368_UpdateVehicleMileage.cs" />
+    <Compile Include="Migrations\202201272049368_UpdateVehicleMileage.designer.cs">
+      <DependentUpon>202201272049368_UpdateVehicleMileage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202022008071_addCreatedandUpdatedBy.cs" />
+    <Compile Include="Migrations\202202022008071_addCreatedandUpdatedBy.designer.cs">
+      <DependentUpon>202202022008071_addCreatedandUpdatedBy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.cs" />
+    <Compile Include="Migrations\202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.designer.cs">
+      <DependentUpon>202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202201251924214_InitialCreate.resx">
+      <DependentUpon>202201251924214_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201252036456_RemoveDealerFromApplicationUser.resx">
+      <DependentUpon>202201252036456_RemoveDealerFromApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201261905566_InStockBoolAdded.resx">
+      <DependentUpon>202201261905566_InStockBoolAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201261949306_AddVehicleName.resx">
+      <DependentUpon>202201261949306_AddVehicleName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201262007346_UpdatedFullName.resx">
+      <DependentUpon>202201262007346_UpdatedFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201272049368_UpdateVehicleMileage.resx">
+      <DependentUpon>202201272049368_UpdateVehicleMileage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202022008071_addCreatedandUpdatedBy.resx">
+      <DependentUpon>202202022008071_addCreatedandUpdatedBy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.resx">
+      <DependentUpon>202202022154432_ChangeDateTimeToDateTime2BecauseEFDidntDoItinTheFirstPlaceLikeItShouldHave.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

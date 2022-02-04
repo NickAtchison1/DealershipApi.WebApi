@@ -207,8 +207,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DealershipController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\SalesPersonController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,7 +324,7 @@
       <Name>DealershipApi.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\DealershipApi.Services\DealershipApi.Services.csproj">
-      <Project>{2660bc05-93cb-4413-8cd4-05f17c0db248}</Project>
+      <Project>{2660BC05-93CB-4413-8CD4-05F17C0DB248}</Project>
       <Name>DealershipApi.Services</Name>
     </ProjectReference>
   </ItemGroup>
