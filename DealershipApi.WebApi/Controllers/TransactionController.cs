@@ -32,7 +32,7 @@ namespace DealershipApi.WebApi.Controllers
         [Authorize(Roles = "Manager,Admin")]
         [HttpPost]
         [Route("api/Transaction/UsedPurchase/{vehicleId:int}")]
-        public IHttpActionResult UsedPurchase(TransactionCreate transaction, int vehicleId)
+        public IHttpActionResult UsedPurchase(TransactionPurchaseCreate transaction, int vehicleId)
         {
             if (!ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace DealershipApi.WebApi.Controllers
         [Authorize(Roles = "Manager,Admin")]
         [HttpPost]
         [Route("api/Transaction/NewPurchase/{vehicleId:int}")]
-        public IHttpActionResult NewPurchase(TransactionCreate transaction, int vehicleId)
+        public IHttpActionResult NewPurchase(TransactionPurchaseCreate transaction, int vehicleId)
         {
             if (!ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace DealershipApi.WebApi.Controllers
         [HttpPost]
         [Authorize(Roles = "Manager,Admin")]
         [Route("api/Transaction/Transfer")]
-        public IHttpActionResult Transfer([FromBody] TransactionPurchaseCreate transactionId)
+        public IHttpActionResult Transfer([FromBody] TransactionTransferCreate transactionId)
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +109,8 @@ namespace DealershipApi.WebApi.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "Manager,Admin")]
-        public IHttpActionResult Sale(TransactionPurchaseCreate sale)
+        [Route("api/Transaction/Sale")]
+        public IHttpActionResult Sale(TransactionSaleCreate sale)
         {
             if (!ModelState.IsValid)
             {

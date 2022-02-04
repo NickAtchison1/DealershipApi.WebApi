@@ -99,7 +99,7 @@ namespace DealershipApi.Services.Services
                             VehicleCondition = entity.VehicleCondition,
                             Mileage = entity.Mileage,
                         };
-                return null;
+             
             }
         }
 
