@@ -16,5 +16,12 @@ namespace DealershipApi.Models.DisplayModels.Transaction
         public int DealershipId { get; set; }
         public decimal SalesPrice { get; set; }
         public DateTime SalesDate { get; set; }
+        public String CreatedBy { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public String UpdatedBy { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }
